@@ -1,13 +1,21 @@
-# Conoce tu Congreso Client
-[![Build Status](https://travis-ci.org/ConoceTuCongreso/client.svg?branch=develop)](https://travis-ci.org/ConoceTuCongreso/client)
-[![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=ctc-client&metric=coverage)](https://sonarcloud.io/api/project_badges/melasure?project=ctc-client&metric=coverage)
+# conoce-tu-congreso-webapp
 
-## Description
-*TODO*
+## Project setup
+```
+yarn install
+```
 
-## Instructions
-*TODO*
+### Compiles and hot-reloads for development
+```
+yarn run serve
+```
 
-## Contributors
-- [@chuyalvarez](https://github.com/chuyalvarez)
-- [@LuciaVG](https://github.com/LuciaVG)
+### Compiles and minifies for production
+```
+yarn run build
+```
+
+### Lints and fixes files
+```
+yarn run lint
+```
