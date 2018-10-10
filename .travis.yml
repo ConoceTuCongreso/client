@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - "8.12"
+
+install:
+  - yarn install --ignore-engines
+
+addons:
+  sonarcloud:
+    organization: "conoce-tu-congreso"
+    token: "$SONAR_TOKEN"
+
+script:
+  - yarn build
+  - yarn lint
+  - sonar-scanner
+
+branches:
+  only:
+    - master
+    - develop
