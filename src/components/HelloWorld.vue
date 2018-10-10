@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+	<h2>Conoce Tu Congreso</h2>
     <h1>{{ msg }}</h1>
     <p>
       For guide and recipes on how to configure / customize this project,<br>
