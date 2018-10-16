@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
 	<h2>Conoce Tu Congreso</h2>
+  <input placeholder="Placeholder" id="first_name" type="text" class="validate">
     <h1>{{ msg }}</h1>
     <p>
       For guide and recipes on how to configure / customize this project,<br>
