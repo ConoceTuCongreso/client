@@ -66,6 +66,7 @@ typings/
 
 # Build
 build/
+dist/
 
 # Lint report
 report.json
