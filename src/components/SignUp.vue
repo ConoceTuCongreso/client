@@ -14,7 +14,6 @@
           <v-flex xs7>
             <v-flex xs12 sm10 offset-sm1>
 
-
               <v-card-title>
                 <h3 class="headline">Sign Up</h3>
               </v-card-title>
@@ -66,6 +65,17 @@
                         ></v-text-field>
                       </v-flex>
 
+                      <v-flex xs12>
+                        <v-text-field
+                        v-model="user"
+                        :error-messages="userErrors"
+                        label="Nombre de Usuario"
+                        required
+                        @input="$v.user.$touch()"
+                        @blur="$v.user.$touch()"
+                        ></v-text-field>
+                      </v-flex>
+
                       <v-flex xs6>
                         <v-text-field
                         v-model="pass"
@@ -86,7 +96,7 @@
                         :error-messages="pass2Errors"
                         :type="show2 ? 'text' : 'password'"
                         :append-icon="show2 ? 'visibility_off' : 'visibility'"
-                        label="Contraseña2"
+                        label="Confirma tu Contraseña"
                         required
                         @input="$v.pass2.$touch()"
                         @blur="$v.pass2.$touch()"
@@ -106,8 +116,6 @@
 
                       </v-flex>
 
-
-
                     </v-layout>
 
                     <v-btn depressed @click="submit" color="accent">submit</v-btn>
@@ -122,9 +130,7 @@
           </v-flex>
         </v-layout>
 
-
       </v-card>
-
 
     </v-flex>
   </v-layout>
@@ -140,6 +146,7 @@
     mixins: [validationMixin],
 
     validations: {
+      user: { required, maxLength: maxLength(64), minLength: minLength(2) },
       name: { required, maxLength: maxLength(64), minLength: minLength(2) },
       lName1: { required, maxLength: maxLength(64), minLength: minLength(2) },
       lName2: { maxLength: maxLength(64), minLength: minLength(2) },
@@ -152,6 +159,7 @@
 
     data: () => ({
 
+      user: '',
       name: '',
       show1: false,
       show2: false,
@@ -160,7 +168,6 @@
       pass: '',
       pass2: '',
       email: '',
-      select: null,
       checkbox: false
     }),
 
@@ -168,6 +175,7 @@
       checkboxErrors () {
         const errors = []
         if (!this.$v.checkbox.$dirty) return errors
+        !(this.$v.checkbox.$model === true) && errors.push('Debes aceptar los términos y condiciones para crear una cuenta')
         return errors
       },
       nameErrors () {
@@ -176,6 +184,14 @@
         !this.$v.name.maxLength && errors.push('Este campo debe tener menos de 64 caracteres')
         !this.$v.name.minLength && errors.push('Este campo debe tener al menos de 2 caracteres')
         !this.$v.name.required && errors.push('Este es un campo requerido')
+        return errors
+      },
+      userErrors () {
+        const errors = []
+        if (!this.$v.user.$dirty) return errors
+        !this.$v.user.maxLength && errors.push('Este campo debe tener menos de 64 caracteres')
+        !this.$v.user.minLength && errors.push('Este campo debe tener al menos de 2 caracteres')
+        !this.$v.user.required && errors.push('Este es un campo requerido')
         return errors
       },
       lName1Errors () {
@@ -220,13 +236,6 @@
       submit () {
         this.$v.$touch()
       },
-      clear () {
-        this.$v.$reset()
-        this.name = ''
-        this.email = ''
-        this.select = null
-        this.checkbox = false
-      }
     }
   }
 </script>
