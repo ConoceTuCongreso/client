@@ -2,6 +2,10 @@
   <v-app>
 <navbar/>
 <v-content>
+
+  <br>
+
+  <br>
   <router-view/>
 
 </v-content>
