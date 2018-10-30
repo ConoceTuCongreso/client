@@ -1,12 +1,17 @@
 <template lang="html">
   <v-app>
-    HOME
+    <InitiativeCard/>
   </v-app>
 </template>
 
 <script>
+import InitiativeCard from './InitiativeCard.vue'
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    InitiativeCard
+  }
 }
 </script>
 
