@@ -1,13 +1,13 @@
 <template lang="html">
-  <div>
+  <div class="myClass">
     <v-toolbar color="primary" app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Title</v-toolbar-title>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer" class="white--text"></v-toolbar-side-icon>
+      <v-toolbar-title class="white--text">Title</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat to='./SignIn'>Link One</v-btn>
-        <v-btn flat to='./Home'>Link Two</v-btn>
-        <v-btn flat to='./SignUp'>Link Three</v-btn>
+        <v-btn class="white--text" flat to='./SignIn'>Link One</v-btn>
+        <v-btn class="white--text" flat to='./Home'>Link Two</v-btn>
+        <v-btn class="white--text" flat to='./SignUp'>Link Three</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 
@@ -34,6 +34,7 @@
                   <v-list-tile
                     v-for="item in items"
                     :key="item.title"
+                    @click=""
                   >
                     <v-list-tile-action>
                       <v-icon>{{ item.icon }}</v-icon>
@@ -66,5 +67,9 @@ export default {
 </script>
 
 <style lang="css">
+
+.myClass{
+  color: #FFF;
+}
 
 </style>
