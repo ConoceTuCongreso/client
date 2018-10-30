@@ -3,9 +3,12 @@ import App from './App.vue'
 import router from './router'
 import Vuetify from 'vuetify'
 
+import Vuelidate from 'vuelidate'
+
+
 import 'vuetify/dist/vuetify.min.css'
 
-Vue.config.productionTip = false
+Vue.use(Vuelidate)
 Vue.use(Vuetify, {
   theme: {
   primary: "#2962FF",
@@ -16,6 +19,9 @@ Vue.use(Vuetify, {
   info: "#2196f3",
   success: "#4caf50"
 }})
+
+Vue.config.productionTip = false
+
 
 new Vue({
   render: h => h(App),
