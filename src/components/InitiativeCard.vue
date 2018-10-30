@@ -85,7 +85,7 @@
                   </v-tab-item>
                   <v-tab-item :id="'documento'" :key="3">
                     <v-card flat>
-                      <v-card-text > Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita rem doloremque impedit voluptates sapiente. Corporis officiis laudantium neque recusandae excepturi dolorum, quas maxime distinctio sunt repellendus rem inventore dignissimos officia.</v-card-text>
+                      <v-card-text ><InitiativeDocument/></v-card-text>
                     </v-card>
                   </v-tab-item>
                   <v-tab-item :id="'firma'" :key="4">
@@ -106,12 +106,17 @@
 </template>
 
 <script>
-  export default {
-    name: 'InitiativeCard',
-    data: () => ({
-      show: false
-    })
-  }
+import InitiativeDocument from './InitiativeDocument.vue'
+
+export default {
+  name: 'InitiativeCard',
+  components: {
+  InitiativeDocument
+  },
+  data: () => ({
+    show: false
+  })
+}
 
 </script>
 
