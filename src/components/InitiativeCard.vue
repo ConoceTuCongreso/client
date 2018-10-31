@@ -74,13 +74,13 @@
                  
                   <v-tab-item :id="'votantes'" :key="1">
                     <v-card flat>
-                      <v-card-text >Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit nulla nam vitae adipisci dolorem commodi architecto asperiores repellat reprehenderit sapiente! Porro placeat corrupti commodi consequuntur facere, in excepturi est quaerat.</v-card-text>
+                      <Voting />
                     </v-card>
                   </v-tab-item>
                   
                   <v-tab-item :id="'lTiempo'" :key="2">
                     <v-card flat>
-                      <v-card-text > Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis nostrum earum tempora dolore sapiente praesentium! Odit culpa nesciunt explicabo rerum. Consectetur, aspernatur atque vitae in labore quam ad consequuntur ex?</v-card-text>
+                      <Timeline />
                     </v-card>
                   </v-tab-item>
                   <v-tab-item :id="'documento'" :key="3">
@@ -90,7 +90,7 @@
                   </v-tab-item>
                   <v-tab-item :id="'firma'" :key="4">
                     <v-card flat>
-                      <v-card-text >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque saepe, dolores odit, ipsa, natus voluptates maxime molestiae rerum et minus expedita velit? Laborum nesciunt sequi optio inventore odio aliquid eligendi?</v-card-text>
+                      <InitiativeSign />
                     </v-card>
                   </v-tab-item>
                 </v-tabs-items>
@@ -106,17 +106,23 @@
 </template>
 
 <script>
+import Timeline from './Timeline'
+import InitiativeSign from './InitiativeSign'
+import Voting from './Voting'
 import InitiativeDocument from './InitiativeDocument.vue'
 
-export default {
-  name: 'InitiativeCard',
-  components: {
-  InitiativeDocument
-  },
-  data: () => ({
-    show: false
-  })
-}
+  export default {
+    name: 'InitiativeCard',
+    data: () => ({
+      show: false
+    }),
+    components: {
+      Voting,
+      Timeline,
+      InitiativeSign,
+      InitiativeDocument
+    }
+  }
 
 </script>
 
