@@ -1,13 +1,13 @@
 <template>
-  <pdf src="http://www.inkwelleditorial.com/pdfSample.pdf"></pdf>
+  <embed src="http://www.inkwelleditorial.com/pdfSample.pdf" width="800" height="800"/>
 </template>
 
 <script>
-import pdf from 'vue-pdf'
-
 export default {
     name: 'InitiativeDocument',
     components: {
-        pdf
+        
     }
 }
+
+</script>
