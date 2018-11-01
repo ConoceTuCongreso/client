@@ -85,7 +85,7 @@
                   </v-tab-item>
                   <v-tab-item :id="'documento'" :key="3">
                     <v-card flat>
-                      <v-card-text > Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita rem doloremque impedit voluptates sapiente. Corporis officiis laudantium neque recusandae excepturi dolorum, quas maxime distinctio sunt repellendus rem inventore dignissimos officia.</v-card-text>
+                      <v-card-text ><InitiativeDocument/></v-card-text>
                     </v-card>
                   </v-tab-item>
                   <v-tab-item :id="'firma'" :key="4">
@@ -109,6 +109,7 @@
 import Timeline from './Timeline'
 import InitiativeSign from './InitiativeSign'
 import Voting from './Voting'
+import InitiativeDocument from './InitiativeDocument.vue'
 
   export default {
     name: 'InitiativeCard',
@@ -118,7 +119,8 @@ import Voting from './Voting'
     components: {
       Voting,
       Timeline,
-      InitiativeSign
+      InitiativeSign,
+      InitiativeDocument
     }
   }
 
