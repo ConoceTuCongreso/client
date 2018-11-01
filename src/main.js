@@ -2,13 +2,14 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import Vuetify from 'vuetify'
-
+import qs from 'qs'
 import Vuelidate from 'vuelidate'
 
 
 import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuelidate)
+Vue.use(qs)
 Vue.use(Vuetify, {
   theme: {
   primary: "#2962FF",

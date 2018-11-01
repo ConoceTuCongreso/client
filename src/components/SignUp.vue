@@ -238,17 +238,19 @@
         this.$v.$touch()
       },
       register (){
-        axios.post(`https://conocetucongreso.me/api/registro`, {
-          body: {
-            'username': this.user,
-            'first_name': this.name,
-            'middle_name': this.lName2,
-            'last_name' : this.lName1,
-            'email': this.email,
-            'password': this.pass
-            
-          }
-        })
+        axios.post(`https://conocetucongreso.me/api/registro`,
+        {
+        'username': this.user,
+        'first_name': this.name,
+        'middle_name': this.lName2,
+        'last_name' : this.lName1,
+        'email': this.email,
+        'password': this.pass
+        },{
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
         .then(response => {console.log(response)})
         .catch(e => {
           console.log(e.config)
