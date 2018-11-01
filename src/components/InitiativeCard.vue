@@ -1,13 +1,13 @@
 <template>
   <v-layout row >
-    <v-flex xs12 sm10 offset-sm1>
+    <v-flex xs10 offset-xs1>
 
       <v-card>
 
         <v-card-title>
           <v-flex xs12 sm11>
-            <div class="headline">Top western road trips</div>
-            <span class="grey--text">1,000 miles of wonder</span>
+            <div class="headline">Iniciativa de Ley de Coordinación de Cultura Cívica para el Estado de Jalisco.</div>
+            <span class="grey--text">Ingresado Por:</span>
           </v-flex>
           <v-flex xs12 sm1>
             <v-card-actions>
@@ -45,10 +45,10 @@
         </v-layout>
         <br>
 
-        <v-slide-y-transition>
-          <v-layout justify-center row v-show="show">
+        <v-slide-y-transition xs12>
+          <v-layout xs12 justify-center row v-show="show">
 
-            <v-tabs >
+            <v-tabs xs12>
 
               <v-layout xs12 class="tabmenu" row>
                 <v-tab class="tab"  :href="'#votantes'" :key="1">
@@ -73,19 +73,19 @@
                 <v-tabs-items v-model="model">
                  
                   <v-tab-item :id="'votantes'" :key="1">
-                    <v-card flat>
+                    <v-card flat class="tabmenu">
                       <Voting />
                     </v-card>
                   </v-tab-item>
                   
                   <v-tab-item :id="'lTiempo'" :key="2">
-                    <v-card flat>
+                    <v-card flat  class="tabmenu">
                       <Timeline />
                     </v-card>
                   </v-tab-item>
                   <v-tab-item :id="'documento'" :key="3">
                     <v-card flat>
-                      <v-card-text ><InitiativeDocument/></v-card-text>
+                      <InitiativeDocument/>
                     </v-card>
                   </v-tab-item>
                   <v-tab-item :id="'firma'" :key="4">
@@ -132,6 +132,7 @@ import InitiativeDocument from './InitiativeDocument.vue'
   margin-left: 3%
 }
 .tabmenu{
-  background-color: #2962ff
+  background-color: #2962ff;
+  width:100%
 }
 </style>
