@@ -1,7 +1,7 @@
 <template>
   <v-app>
 <navbar/>
-<v-content>
+<v-content  class="white2">
 
   <br>
 
@@ -10,7 +10,7 @@
 
 </v-content>
 
-  </v-app>
+</v-app>
 </template>
 
 <script>
@@ -37,4 +37,7 @@ export default {
   color: #2c3e50;
 }
 
+.material-icons.material-icons--sharp {
+  font-family: 'Material Icons Sharp';
+}
 </style>
