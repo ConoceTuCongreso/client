@@ -15,7 +15,7 @@
             <v-flex xs12 sm10 offset-sm1>
 
               <v-card-title>
-                <h3 class="headline">Sign Up</h3>
+                <h3 class="headline">Regístrate</h3>
               </v-card-title>
 
               <v-card-text class="px-0">
@@ -25,6 +25,7 @@
 
                       <v-flex xs12>
                         <v-text-field
+                        dense
                         v-model="name"
                         :error-messages="nameErrors"
                         label="Nombre(s)"
@@ -36,6 +37,7 @@
 
                       <v-flex xs6>
                         <v-text-field
+                        dense
                         v-model="lName1"
                         :error-messages="lName1Errors"
                         label="Apellido Paterno"
@@ -47,6 +49,7 @@
 
                       <v-flex xs6>
                         <v-text-field
+                        dense
                         v-model="lName2"
                         :error-messages="lName2Errors"
                         label="Apellido Materno"
@@ -57,6 +60,7 @@
 
                       <v-flex xs12>
                         <v-text-field
+                        dense
                         v-model="email"
                         :error-messages="emailErrors"
                         label="Correo Electrónico"
@@ -67,6 +71,7 @@
 
                       <v-flex xs12>
                         <v-text-field
+                        dense
                         v-model="user"
                         :error-messages="userErrors"
                         label="Nombre de Usuario"
@@ -78,6 +83,7 @@
 
                       <v-flex xs6>
                         <v-text-field
+                        dense
                         v-model="pass"
                         :error-messages="passErrors"
                         :type="show1 ? 'text' : 'password'"
@@ -90,8 +96,10 @@
                         ></v-text-field>
                       </v-flex>
 
-                      <v-flex xs6>
+                      <v-flex xs6 >
+
                         <v-text-field
+                        dense
                         v-model="pass2"
                         :error-messages="pass2Errors"
                         :type="show2 ? 'text' : 'password'"
@@ -106,6 +114,7 @@
 
                       <v-flex xs12>
                         <v-checkbox
+                        dense
                         v-model="checkbox"
                         :error-messages="checkboxErrors"
                         label="He leído y acepto los términos y condiciones."
@@ -244,6 +253,8 @@
 <style lang="css">
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
 
-
+.myImg{
+  z-index: 600;
+}
 
 </style>
