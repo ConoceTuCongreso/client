@@ -1,33 +1,31 @@
 <template lang="html">
   <div class="myClass">
-    <v-toolbar color="gray4" app clipped-left flat height="58px">
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" class="white--text"></v-toolbar-side-icon>
-      <v-toolbar-title class="white--text">Conoce tu Congreso</v-toolbar-title>
+    <v-toolbar color="white1" light app dense flat height="58px">
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"  dark  color="gray4" class="text--white"></v-toolbar-side-icon>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
 
-        <v-btn class="white--text" flat to='./SignIn'>Link One</v-btn>
-        <v-btn class="white--text" flat to='./Home'>Link Two</v-btn>
-        <v-btn class="white--text" flat to='./SignUp'>Link Three</v-btn>
+        <v-btn flat to='./SignIn'>Link One</v-btn>
+        <v-btn flat to='./Home'>Link Two</v-btn>
+        <v-btn flat to='./SignUp'>Link Three</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 
               <v-navigation-drawer
-              class="white1"
+              class="gray4"
                 v-model="drawer"
                 hide-overlay
-                clipped
+                dark
+                dense
                 floating
                 app
               >
 
-                <v-list class="pt-0" dense>
+                <v-list class="pt-0">
 
-
-                  <v-list-tile-action>
-                    <v-img :src="require('../img/logo.png')" height="20%"></v-img>
-                  </v-list-tile-action>
-
+            <v-list-tile-content class="three-line">
+              <v-list-tile-title class="three-line myTitle">Conoce tu Congreso</v-list-tile-title>
+            </v-list-tile-content>
 
                   <v-list-tile
                     v-for="item in items"
@@ -48,6 +46,8 @@
 </template>
 
 <script>
+//                    <v-img :src="require('../img/logo.png')" height="20%"></v-img>
+
 
 export default {
   name: 'Navbar',
@@ -65,8 +65,16 @@ export default {
 
 <style lang="css">
 
+@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One');
+
+
 .drawer{
   color: #4a69bd;
   background-color: #4a69bd;
+}
+
+.myTitle{
+  font-family: 'Alfa Slab One', cursive;
+  font-size: 40px;
 }
 </style>

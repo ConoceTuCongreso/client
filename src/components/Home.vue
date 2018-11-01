@@ -1,7 +1,7 @@
 <template lang="html">
-  <v-app>
+  <v-content>
     <InitiativeCard/>
-  </v-app>
+  </v-content>
 </template>
 
 <script>
