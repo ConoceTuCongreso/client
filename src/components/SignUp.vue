@@ -238,7 +238,7 @@
         this.$v.$touch()
       },
       register (){
-        axios.post(`https://conocetucongreso.me/api/registro`,
+        axios.post('http://10.43.44.59:3000/api/registro',
         {
         'username': this.user,
         'first_name': this.name,
@@ -246,11 +246,7 @@
         'last_name' : this.lName1,
         'email': this.email,
         'password': this.pass
-        },{
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
+        })
         .then(response => {console.log(response)})
         .catch(e => {
           console.log(e.config)
