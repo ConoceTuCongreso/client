@@ -1,13 +1,13 @@
 <template>
   <v-layout row >
-    <v-flex xs12 sm10 offset-sm1>
+    <v-flex xs10 offset-xs1>
 
       <v-card>
 
         <v-card-title>
           <v-flex xs12 sm11>
-            <div class="headline">Top western road trips</div>
-            <span class="grey--text">1,000 miles of wonder</span>
+            <div class="headline">Iniciativa de Ley de Coordinación de Cultura Cívica para el Estado de Jalisco.</div>
+            <span class="grey--text">Ingresado Por: Salvador Caro Cabrera</span>
           </v-flex>
           <v-flex xs12 sm1>
             <v-card-actions>
@@ -22,7 +22,7 @@
 
         <v-flex xs10 offset-xs1>
           <v-progress-linear
-            color="success"
+            color="#1abc9c"
             height="20"
             value="100"
           ></v-progress-linear>
@@ -31,39 +31,47 @@
         <v-layout xs10 offset-xs1 row class="text-xs-center">
           
           <v-flex xs2  >
-            <h3 class="headline">|</h3>
+            <h3 class="headline">Entrada</h3>
           </v-flex>
           <v-flex xs4>
-            <h3 class="headline">|</h3>
+            <h3 class="headline">En estudio</h3>
           </v-flex>
           <v-flex xs4>
-            <h3 class="headline">|</h3>
+            <h3 class="headline">Conclusion</h3>
           </v-flex>
           <v-flex xs2 class="tab">
-            <h3 class="headline">|</h3>
+            <h3 class="headline">En vigor</h3>
           </v-flex>
         </v-layout>
         <br>
 
-        <v-slide-y-transition>
-          <v-layout justify-center row v-show="show">
+        <v-slide-y-transition xs12>
+          <v-layout xs12 justify-center row v-show="show">
 
-            <v-tabs >
+            <v-tabs  xs12>
 
-              <v-layout xs12 class="tabmenu" row>
-                <v-tab class="tab"  :href="'#votantes'" :key="1">
+              <v-layout xs12 class="tabmenu " row>
+                <v-tab class="tab white--text"  :href="'#votantes'" :key="1">
+                  <v-icon dark>how_to_reg</v-icon>
                   Votantes
+                  
                 </v-tab >
 
-                <v-tab class="tab" :href="'#lTiempo'" :key="2">
+                <v-tab class="tab white--text" :href="'#lTiempo'" :key="2">
+                  <v-icon dark>query_builder</v-icon>
                   Linea del tiempo
+                  
                 </v-tab>
 
-                <v-tab class="tab"  :href="'#documento'" :key="3">
+                <v-tab class="tab white--text"  :href="'#documento'" :key="3">
+                  <v-icon dark>book</v-icon>
+                  
                   Documento
+                  
                 </v-tab>
 
-                <v-tab class="tab"  :href="'#firma'" :key="4">
+                <v-tab class="tab white--text"  :href="'#firma'" :key="4">
+                  <v-icon dark>how_to_vote</v-icon>
                   Firmar
                 </v-tab>
               </v-layout>
@@ -73,24 +81,24 @@
                 <v-tabs-items v-model="model">
                  
                   <v-tab-item :id="'votantes'" :key="1">
-                    <v-card flat>
-                      <v-card-text >Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit nulla nam vitae adipisci dolorem commodi architecto asperiores repellat reprehenderit sapiente! Porro placeat corrupti commodi consequuntur facere, in excepturi est quaerat.</v-card-text>
+                    <v-card flat class="tabmenu">
+                      <Voting />
                     </v-card>
                   </v-tab-item>
                   
                   <v-tab-item :id="'lTiempo'" :key="2">
-                    <v-card flat>
-                      <v-card-text > Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis nostrum earum tempora dolore sapiente praesentium! Odit culpa nesciunt explicabo rerum. Consectetur, aspernatur atque vitae in labore quam ad consequuntur ex?</v-card-text>
+                    <v-card flat  class="tabmenu">
+                      <Timeline />
                     </v-card>
                   </v-tab-item>
                   <v-tab-item :id="'documento'" :key="3">
                     <v-card flat>
-                      <v-card-text > Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita rem doloremque impedit voluptates sapiente. Corporis officiis laudantium neque recusandae excepturi dolorum, quas maxime distinctio sunt repellendus rem inventore dignissimos officia.</v-card-text>
+                      <InitiativeDocument/>
                     </v-card>
                   </v-tab-item>
                   <v-tab-item :id="'firma'" :key="4">
                     <v-card flat>
-                      <v-card-text >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque saepe, dolores odit, ipsa, natus voluptates maxime molestiae rerum et minus expedita velit? Laborum nesciunt sequi optio inventore odio aliquid eligendi?</v-card-text>
+                      <InitiativeSign />
                     </v-card>
                   </v-tab-item>
                 </v-tabs-items>
@@ -106,11 +114,22 @@
 </template>
 
 <script>
+import Timeline from './Timeline'
+import InitiativeSign from './InitiativeSign'
+import Voting from './Voting'
+import InitiativeDocument from './InitiativeDocument.vue'
+
   export default {
     name: 'InitiativeCard',
     data: () => ({
       show: false
-    })
+    }),
+    components: {
+      Voting,
+      Timeline,
+      InitiativeSign,
+      InitiativeDocument
+    }
   }
 
 </script>
@@ -121,6 +140,7 @@
   margin-left: 3%
 }
 .tabmenu{
-  background-color: #2962ff
+  background-color: #16a085;
+  width:900px
 }
 </style>
