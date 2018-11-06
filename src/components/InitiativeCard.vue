@@ -6,8 +6,8 @@
 
         <v-card-title>
           <v-flex xs12 sm11>
-            <div class="headline">Iniciativa de Ley de Coordinación de Cultura Cívica para el Estado de Jalisco.</div>
-            <span class="grey--text">Ingresado Por: Salvador Caro Cabrera</span>
+            <div class="headline">{{initiative.description}}</div>
+            <span class="grey--text">Ingresado Por: {{initiative.author}}</span>
           </v-flex>
           <v-flex xs12 sm1>
             <v-card-actions>
@@ -24,7 +24,7 @@
           <v-progress-linear
             color="#1abc9c"
             height="20"
-            value="100"
+            :value=val
           ></v-progress-linear>
         </v-flex>
 
@@ -122,13 +122,38 @@ import InitiativeDocument from './InitiativeDocument.vue'
   export default {
     name: 'InitiativeCard',
     data: () => ({
-      show: false
+      show: false,
+      val:  0
     }),
+    props: {
+      initiative: Object,
+    },
     components: {
       Voting,
       Timeline,
       InitiativeSign,
       InitiativeDocument
+    },
+    methods:{
+      setProgressValue: function setProgressValue(status) {
+        console.log(status)
+        switch(status){
+          case "Ingreso Administrativo":
+            val=33;
+            break;
+          case "Estudio":
+            val=66;
+            break;
+          case "Concluido":
+            val=100;
+            break;
+          default:
+            val=0;
+        }
+      }
+    },
+    beforeMount(){
+      setProgressValue(initiative.status)
     }
   }
 
