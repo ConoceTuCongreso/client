@@ -251,10 +251,5 @@
 
 
 <style lang="css">
-@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
-
-.myImg{
-  z-index: 600;
-}
 
 </style>
