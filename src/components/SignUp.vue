@@ -2,7 +2,7 @@
 
   <v-layout  class="cosita">
     <v-flex xs12 sm8 offset-sm2>
-
+        {{user}}
       <v-card>
 
         <v-layout row wrap>
@@ -127,7 +127,7 @@
 
                     </v-layout>
 
-                    <v-btn depressed @click="submit" color="accent">submit</v-btn>
+                    <v-btn depressed @click="register()" color="accent">submit</v-btn>
 
                   </v-container>
 
@@ -148,6 +148,7 @@
 
 
 <script>
+  import axios from 'axios';
   import { validationMixin } from 'vuelidate'
   import { required, maxLength, email, minLength } from 'vuelidate/lib/validators'
 
@@ -245,6 +246,21 @@
       submit () {
         this.$v.$touch()
       },
+      register (){
+        axios.post('http://10.43.44.59:3000/api/registro',
+        {
+        'username': this.user,
+        'first_name': this.name,
+        'middle_name': this.lName2,
+        'last_name' : this.lName1,
+        'email': this.email,
+        'password': this.pass
+        })
+        .then(response => {console.log(response)})
+        .catch(e => {
+          console.log(e.config)
+        })
+      }
     }
   }
 </script>
