@@ -95,7 +95,6 @@
           })
           .then(response => {})
           .catch(e => {
-            console.log(e.config)
           })
 
         } else {
@@ -105,9 +104,8 @@
             'username': this.user,
             'password': this.pass
           })
-          .then(response => {})
+          .then(response => { })
           .catch(e => {
-            console.log(e.config)
           })
         }
       }

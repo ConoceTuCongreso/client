@@ -256,9 +256,8 @@
         'email': this.email,
         'password': this.pass
         })
-        .then(response => {console.log(response)})
+        .then(response => {})
         .catch(e => {
-          console.log(e.config)
         })
       }
     }
