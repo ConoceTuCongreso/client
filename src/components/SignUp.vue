@@ -160,7 +160,7 @@
       name: { required, maxLength: maxLength(64), minLength: minLength(2) },
       lName1: { required, maxLength: maxLength(64), minLength: minLength(2) },
       lName2: { maxLength: maxLength(64), minLength: minLength(2) },
-      pass: { required, minLength: minLength(10) },
+      pass: { required, minLength: minLength(8) },
       pass2: { required },
       email: { required, email },
       checkbox: { checked (val) { return val } }
@@ -247,7 +247,7 @@
         this.$v.$touch()
       },
       register (){
-        axios.post('http://10.43.44.59:3000/api/registro',
+        axios.post('https://conocetucongreso.me/api/registro',
         {
         'username': this.user,
         'first_name': this.name,

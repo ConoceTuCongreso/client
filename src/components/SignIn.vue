@@ -66,6 +66,8 @@
 
 <script>
 
+  import axios from 'axios';
+
   export default {
 
     password: 'Password',
@@ -83,7 +85,31 @@
       },
       check () {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        console.log(re.test(String(this.user).toLowerCase()));
+        
+        if( re.test(String(this.user).toLowerCase()) ){
+
+          axios.post('https://conocetucongreso.me/api/login',
+          {
+            'email': this.user,
+            'password': this.pass
+          })
+          .then(response => {})
+          .catch(e => {
+            console.log(e.config)
+          })
+
+        } else {
+
+          axios.post('https://conocetucongreso.me/api/login',
+          {
+            'username': this.user,
+            'password': this.pass
+          })
+          .then(response => {})
+          .catch(e => {
+            console.log(e.config)
+          })
+        }
       }
     }
   }
