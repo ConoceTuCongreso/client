@@ -2,7 +2,7 @@
 
   <v-layout  class="cosita">
     <v-flex xs12 sm8 offset-sm2>
-
+        {{user}}
       <v-card>
 
         <v-layout row wrap>
@@ -127,7 +127,7 @@
 
                     </v-layout>
 
-                    <v-btn depressed @click="submit" color="accent">submit</v-btn>
+                    <v-btn depressed @click="register()" color="accent">submit</v-btn>
 
                   </v-container>
 
@@ -148,6 +148,7 @@
 
 
 <script>
+  import axios from 'axios';
   import { validationMixin } from 'vuelidate'
   import { required, maxLength, email, minLength } from 'vuelidate/lib/validators'
 
@@ -159,7 +160,7 @@
       name: { required, maxLength: maxLength(64), minLength: minLength(2) },
       lName1: { required, maxLength: maxLength(64), minLength: minLength(2) },
       lName2: { maxLength: maxLength(64), minLength: minLength(2) },
-      pass: { required, minLength: minLength(10) },
+      pass: { required, minLength: minLength(8) },
       pass2: { required },
       email: { required, email },
       checkbox: { checked (val) { return val } }
@@ -245,16 +246,24 @@
       submit () {
         this.$v.$touch()
       },
+      register (){
+        axios.post('https://conocetucongreso.me/api/registro',
+        {
+        'username': this.user,
+        'first_name': this.name,
+        'middle_name': this.lName2,
+        'last_name' : this.lName1,
+        'email': this.email,
+        'password': this.pass
+        })
+        .then()
+        .catch()
+      }
     }
   }
 </script>
 
 
 <style lang="css">
-@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
-
-.myImg{
-  z-index: 600;
-}
 
 </style>
