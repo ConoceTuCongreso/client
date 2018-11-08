@@ -82,18 +82,18 @@
                  
                   <v-tab-item :id="'votantes'" :key="1">
                     <v-card flat class="tabmenu">
-                      <Voting />
+                      <Voting :votes="initiative.votes"/>
                     </v-card>
                   </v-tab-item>
                   
                   <v-tab-item :id="'lTiempo'" :key="2">
                     <v-card flat  class="tabmenu">
-                      <Timeline />
+                      <Timeline :timeline="initiative.dates"/>
                     </v-card>
                   </v-tab-item>
                   <v-tab-item :id="'documento'" :key="3">
                     <v-card flat>
-                      <InitiativeDocument/>
+                      <InitiativeDocument :url="initiative.doc_url"/>
                     </v-card>
                   </v-tab-item>
                   <v-tab-item :id="'firma'" :key="4">
@@ -135,25 +135,24 @@ import InitiativeDocument from './InitiativeDocument.vue'
       InitiativeDocument
     },
     methods:{
-      setProgressValue: function setProgressValue(status) {
-        console.log(status)
+      setProgressValue(status) {
         switch(status){
           case "Ingreso Administrativo":
-            val=33;
+            this.val=33;
             break;
           case "Estudio":
-            val=66;
+            this.val=66;
             break;
           case "Concluido":
-            val=100;
+            this.val=100;
             break;
           default:
-            val=0;
+            this.val=0;
         }
       }
     },
     beforeMount(){
-      setProgressValue(initiative.status)
+      this.setProgressValue(this.initiative.status)
     }
   }
 

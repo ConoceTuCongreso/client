@@ -1,7 +1,7 @@
 <template lang="html">
 
   <v-layout row wrap>
-    <v-flex xs12 v-for="initiative in initiatives">
+    <v-flex xs12 v-for="(initiative,i) in initiatives" :key="i">
       <InitiativeCard :initiative="initiative"/>
       <br>
     </v-flex>
@@ -19,7 +19,7 @@ export default {
     { 
         "initiative_id":"1",
         "description":"Iniciativa de Ley de Coordinación de Cultura Cívica para el Estado de Jalisco.",
-        "status": "Concluido",
+        "status": "Estudio",
         "doc_url": "http://congresoweb.congresojal.gob.mx/infolej/agendakioskos/documentos/sistemaintegral/estados/58168.pdf",
         "author": "Salvador Caro Cabrera",
         "dates": [
@@ -40,8 +40,9 @@ export default {
             }
         ],
         "votes": [
-            {
-                "a favor": [
+            {   
+                "position":"a favor",
+                "votees": [
                     "Mónica Almeida López",
                     "Juan Carlos Anguiano Orozco",
                     "Jorge Arana Arana",
@@ -69,10 +70,16 @@ export default {
                     "Fela Patricia Pelayo López",
                     "María del Pilar Pérez Chavira",
                     "Erika Lizbeth Ramírez Pérez",
-                    "María del Consuelo Robles Sierra"],
-                "en contra": [],
-                "abstencion": [],
-                "sin participacion": [
+                    "María del Consuelo Robles Sierra"]
+              },{
+                "position":"en contra",
+                "votees": []
+              },{
+                "position":"abstencion",
+                "votees": []
+              },{
+                "position":"sin participacion",
+                "votees": [
                     "Juana Ceballos Guzmán",
                     "Isaías Cortés Berumen",
                     "Irma De Anda Licea",
@@ -107,8 +114,9 @@ export default {
             }
         ],
         "votes": [
-            {
-                "a favor": [
+            {   
+                "position":"a favor",
+                "votees": [
                     "Mónica Almeida López",
                     "Juan Carlos Anguiano Orozco",
                     "Jorge Arana Arana",
@@ -136,16 +144,23 @@ export default {
                     "Fela Patricia Pelayo López",
                     "María del Pilar Pérez Chavira",
                     "Erika Lizbeth Ramírez Pérez",
-                    "María del Consuelo Robles Sierra",
+                    "María del Consuelo Robles Sierra"]
+              },{
+                "position":"en contra",
+                "votees": []
+              },{
+                "position":"abstencion",
+                "votees": []
+              },{
+                "position":"sin participacion",
+                "votees": [
                     "Juana Ceballos Guzmán",
                     "Isaías Cortés Berumen",
                     "Irma De Anda Licea",
                     "Saúl Galindo Plazola",
                     "José Pedro Kumamoto Aguilar",
-                    "María del Refugio Ruiz Moreno"],
-                "en contra": [],
-                "abstencion": [],
-                "sin participacion": []
+                    "María del Refugio Ruiz Moreno"
+                ]
             }
         ]
     },
@@ -188,17 +203,21 @@ export default {
             }
         ],
         "votes": [
-            {
-                "a favor": [
+            {   
+                "position":"a favor",
+                "votees": [
                     "Mónica Almeida López",
                     "Juan Carlos Anguiano Orozco",
                     "Jorge Arana Arana",
                     "Salvador Arellano Guzmán",
                     "Enrique Aubry de Castro Palomino",
                     "Édgar Oswaldo Bañales Orozco",
+                    "Martha Susana Barajas del Toro",
+                    "Mario Hugo Castellanos Ibarra",
                     "Hugo Contreras Zepeda",
                     "María del Rocío Corona Nakamura",
                     "María Elena de Anda Gutiérrez",
+                    "Ismael Del Toro Castro",
                     "Claudia Delgadillo González",
                     "José Gacría Mora",
                     "Cecilia González Gómez",
@@ -208,28 +227,28 @@ export default {
                     "Kehila Abigail Ku Escalante",
                     "Antonio López Orozco",
                     "María de Lourdes Martínez Pizano",
+                    "Adriana Gabriela Medina Ortíz",
                     "Miguel Ángel Monraz Ibarra",
                     "Liliana Guadalupe Morones Vargas",
                     "Fela Patricia Pelayo López",
                     "María del Pilar Pérez Chavira",
                     "Erika Lizbeth Ramírez Pérez",
-                    "Hugo Rodríguez Díaz",
-                    "Felipe de Jesús Romo Cuellar",
-                    "Hugo Rene Ruiz Esparza Hermosillo",
+                    "María del Consuelo Robles Sierra"]
+              },{
+                "position":"en contra",
+                "votees": []
+              },{
+                "position":"abstencion",
+                "votees": []
+              },{
+                "position":"sin participacion",
+                "votees": [
+                    "Juana Ceballos Guzmán",
                     "Isaías Cortés Berumen",
                     "Irma De Anda Licea",
                     "Saúl Galindo Plazola",
                     "José Pedro Kumamoto Aguilar",
-                    "María del Refugio Ruiz Moreno"],
-                "en contra": [],
-                "abstencion": [],
-                "sin participacion": [
-                    "Martha Susana Barajas del Toro",
-                    "Mario Hugo Castellanos Ibarra",
-                    "Juana Ceballos Guzmán",
-                    "Ismael Del Toro Castro",
-                    "Adriana Gabriela Medina Ortíz",
-                    "María del Consuelo Robles Sierra"
+                    "María del Refugio Ruiz Moreno"
                 ]
             }
         ]
