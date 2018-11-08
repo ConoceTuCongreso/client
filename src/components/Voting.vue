@@ -3,8 +3,8 @@
     <v-layout row wrap>
         <v-flex
           xs3
-          v-for="vote in votes"
-        >
+          v-for="(vote,i) in votes"
+          :key="i">
           <v-card >
             <v-card-title ><h4>{{ vote.position }}</h4></v-card-title>
             <v-divider></v-divider>
