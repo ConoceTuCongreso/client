@@ -84,8 +84,7 @@
         this.$v.$touch()
       },
       check () {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        
+        const re = new RegExp('^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
         if( re.test(String(this.user).toLowerCase()) ){
 
           axios.post('https://conocetucongreso.me/api/login',
@@ -104,9 +103,8 @@
             'username': this.user,
             'password': this.pass
           })
-          .then(response => { })
-          .catch(e => {
-          })
+          .then()
+          .catch()
         }
       }
     }

@@ -256,9 +256,8 @@
         'email': this.email,
         'password': this.pass
         })
-        .then(response => {})
-        .catch(e => {
-        })
+        .then()
+        .catch()
       }
     }
   }
