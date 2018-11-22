@@ -1,15 +1,6 @@
 <template>
   <v-app>
-<navbar/>
-<v-content  class="white2">
-
-  <br>
-
-  <br>
-  <router-view/>
-
-</v-content>
-
+        <router-view></router-view>
 </v-app>
 </template>
 
@@ -17,14 +8,16 @@
 
 import SignUp from './components/SignUp.vue'
 import Navbar from './components/Navbar.vue'
+import Landing from './components/Landing.vue'
 
 
 export default {
   name: 'app',
   components: {
     SignUp,
-    Navbar
-  }
+    Navbar,
+    Landing
+  } 
 }
 </script>
 
@@ -34,6 +27,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  width: 100%;
+
 }
 
 .material-icons.material-icons--sharp {

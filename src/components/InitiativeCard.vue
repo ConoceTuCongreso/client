@@ -4,14 +4,14 @@
 
       <v-card>
 
-        <v-card-title>
+        <v-card-title @click="show = !show" no-action>
           <v-flex xs12 sm11>
             <div class="headline">{{initiative.description}}</div>
             <span class="grey--text">Ingresado Por: {{initiative.author}}</span>
           </v-flex>
           <v-flex xs12 sm1>
             <v-card-actions>
-              <v-btn icon @click="show = !show">
+              <v-btn icon>
                 <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
               </v-btn>
             </v-card-actions>

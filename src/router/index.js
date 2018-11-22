@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import SignUp from '@/components/SignUp'
 import SignIn from '@/components/SignIn'
 import Home from '@/components/Home'
+import Landing from '@/components/Landing'
+import Main from '@/components/Main'
 
 Vue.use(Router)
 
@@ -11,21 +13,32 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/signup',
-      name: 'SignUp',
-      component: SignUp
+      path: '/',
+      name: 'Landing',
+      component: Landing,
+      children: [
+        {
+          path: '/',
+          component: SignUp
+        },
+        {
+          path: 'signin',
+          component: SignIn
+        }
+      ]
     },
 
     {
-    path: '/home',
-    name: 'Home',
-    component: Home
-  },
-
-  {
-    path: '/signin',
-    name: 'SignIn',
-    component: SignIn
-  }
+      path: '/main',
+      name: 'Main',
+      component: Main,
+      children: [
+        {
+          path: '/',
+          component: Home
+        }
+      
+      ]
+    }
   ]
 })
