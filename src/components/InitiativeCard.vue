@@ -30,56 +30,45 @@
 
         <v-layout xs10 offset-xs1 row class="text-xs-center">
           
-          <v-flex xs2  >
+          <v-flex xs3 offset-xs2>
             <h3 class="headline">Entrada</h3>
           </v-flex>
-          <v-flex xs4>
+          <v-flex xs3 offset-xs1>
             <h3 class="headline">En estudio</h3>
           </v-flex>
-          <v-flex xs4>
+          <v-flex xs2 offset-xs1>
             <h3 class="headline">Conclusion</h3>
-          </v-flex>
-          <v-flex xs2 class="tab">
-            <h3 class="headline">En vigor</h3>
           </v-flex>
         </v-layout>
         <br>
 
-        <v-slide-y-transition xs12>
-          <v-layout xs12 justify-center row v-show="show">
-
-            <v-tabs  xs12>
-
-              <v-layout xs12 class="tabmenu " row>
-                <v-tab class="tab white--text"  :href="'#votantes'" :key="1">
+        <v-slide-y-transition>
+          <v-layout v-show="show">
+            <v-tabs class="tabmenu">
+              <v-flex xs12 class="tabcolor" row>
+                <v-tab class="white--text tab" :href="'#votantes'" :key="1">
                   <v-icon dark>how_to_reg</v-icon>
                   Votantes
-                  
                 </v-tab >
 
-                <v-tab class="tab white--text" :href="'#lTiempo'" :key="2">
+                <v-tab class="white--text tab" :href="'#lTiempo'" :key="2">
                   <v-icon dark>query_builder</v-icon>
                   Linea del tiempo
-                  
                 </v-tab>
 
-                <v-tab class="tab white--text"  :href="'#documento'" :key="3">
+                <v-tab class="white--text tab"  :href="'#documento'" :key="3">
                   <v-icon dark>book</v-icon>
-                  
                   Documento
-                  
                 </v-tab>
 
-                <v-tab class="tab white--text"  :href="'#firma'" :key="4">
+                <v-tab class="white--text tab" fill-height :href="'#firma'" :key="4">
                   <v-icon dark>how_to_vote</v-icon>
                   Firmar
                 </v-tab>
-              </v-layout>
-
+              </v-flex>
               
                 
-                <v-tabs-items v-model="model">
-                 
+                <v-tabs-items>
                   <v-tab-item :id="'votantes'" :key="1">
                     <v-card flat class="tabmenu">
                       <Voting :votes="initiative.votes"/>
@@ -98,7 +87,7 @@
                   </v-tab-item>
                   <v-tab-item :id="'firma'" :key="4">
                     <v-card flat>
-                      <InitiativeSign />
+                      <InitiativeSign :initiativename="initiative.description" />
                     </v-card>
                   </v-tab-item>
                 </v-tabs-items>
@@ -159,12 +148,13 @@ import InitiativeDocument from './InitiativeDocument.vue'
 </script>
 
 <style>
-.tab{
-  width: 25%;
-  margin-left: 3%
-}
 .tabmenu{
+  width:100%;
+}
+.tabcolor{
   background-color: #16a085;
-  width:900px
+}
+.tab{
+  width: 24%
 }
 </style>
