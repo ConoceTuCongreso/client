@@ -1,28 +1,18 @@
 <template lang="html">
 
   <v-layout  class="cosita">
-    <v-flex xs12 sm8 offset-sm2>
-
-      <v-card>
-
+    <v-flex xs12 sm10 offset-sm1>
+      <v-card flat>
         <v-layout row wrap>
-
-          <v-flex xs5>
-            <v-img src="https://images.unsplash.com/photo-1540167828867-7e5020e0bc8e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6b75c91f2c2c552d78c93be1f87d6fc2&auto=format&fit=crop&w=1868&q=80" height="100%"></v-img>
-          </v-flex>
-
-          <v-flex xs7>
+          <v-flex xs12>
             <v-flex xs12 sm10 offset-sm1>
-
               <v-card-title>
                 <h3 class="headline">Iniciar Sesión</h3>
               </v-card-title>
-
               <v-card-text class="px-0">
                 <v-form>
                   <v-container>
                     <v-layout row wrap>
-
                       <v-flex xs12>
                         <v-text-field
                         dense
@@ -43,8 +33,14 @@
                       </v-flex>
 
                     </v-layout>
+                    <v-layout>
 
                     <v-btn depressed @click="check()" color="accent">submit</v-btn>
+
+                        <v-spacer></v-spacer>
+
+                    <v-btn flat small to='./'>Crear una cuenta</v-btn>
+                    </v-layout>
 
                   </v-container>
 
@@ -67,6 +63,7 @@
 <script>
 
   import axios from 'axios';
+  import router from '../router';
 
   export default {
 
@@ -84,27 +81,25 @@
         this.$v.$touch()
       },
       check () {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}))$/;
         
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}))$/;
+        let body;
+
         if( re.test(String(this.user).toLowerCase()) ){
 
-          axios.post('https://conocetucongreso.me/api/login',
-          {
-            'email': this.user,
-            'password': this.pass
-          })
-          .then()
-          .catch()
-
+          body = {'email': this.user, 'password': this.pass };
         } else {
-          axios.post('https://conocetucongreso.me/api/login',
-          {
-            'username': this.user,
-            'password': this.pass
-          })
-          .then()
-          .catch()
+
+          body = { 'username': this.user, 'password': this.pass };
         }
+
+          axios.post('https://conocetucongreso.me/api/login', body )
+          .then( function (response) {
+
+            if(response.status === 200){
+              router.push('main')
+            }
+          }).catch();
       }
     }
   }

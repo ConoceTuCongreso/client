@@ -22,7 +22,7 @@
     >
         <v-list-tile class="category">
             <v-list-tile-avatar>
-             <v-img :src="require('../img/logo.png')"></v-img>
+             <v-img :src="require('../img/logo.png')" class="landingImg"></v-img>
             </v-list-tile-avatar>
 
             <v-list-tile-content>
