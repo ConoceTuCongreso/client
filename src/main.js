@@ -21,7 +21,7 @@ Vue.use(Vuetify, {
   info: "#2196f3",
   success: "#4caf50",
   white1: "#ffffff",
-  white2: "#f1f2f6",
+  white2: "#ecf0f1",
   white3: "#dfe4ea",
   white4: "#7f8c8d",
   gray1: "#a4b0be",

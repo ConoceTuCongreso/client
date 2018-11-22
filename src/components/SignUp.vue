@@ -1,17 +1,13 @@
 <template lang="html">
 
-  <v-layout  class="cosita">
-    <v-flex xs12 sm8 offset-sm2>
-        {{user}}
+  <v-layout>
+    <v-flex xs12 sm10 offset-sm1>
       <v-card>
 
         <v-layout row wrap>
 
-          <v-flex xs5>
-            <v-img src="https://images.unsplash.com/photo-1540167828867-7e5020e0bc8e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6b75c91f2c2c552d78c93be1f87d6fc2&auto=format&fit=crop&w=1868&q=80" height="100%"></v-img>
-          </v-flex>
 
-          <v-flex xs7>
+          <v-flex xs12>
             <v-flex xs12 sm10 offset-sm1>
 
               <v-card-title>
@@ -127,7 +123,14 @@
 
                     </v-layout>
 
+                    <v-layout>
+                    
                     <v-btn depressed @click="register()" color="accent">submit</v-btn>
+                    <v-spacer></v-spacer>
+
+                    <v-btn flat small to='./SignIn'>Ya tengo una cuenta</v-btn>
+
+                    </v-layout>
 
                   </v-container>
 
@@ -247,7 +250,7 @@
         this.$v.$touch()
       },
       register (){
-        axios.post('https://conocetucongreso.me/api/registro',
+        axios.post('https://conocetucongreso.me/api/signup',
         {
         'username': this.user,
         'first_name': this.name,
