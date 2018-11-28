@@ -71,7 +71,7 @@
                 <v-tabs-items>
                   <v-tab-item :id="'votantes'" :key="1">
                     <v-card flat class="tabmenu">
-                      <Voting :votes="initiative.votes"/>
+                      <Voting :id="initiative.id"/>
                     </v-card>
                   </v-tab-item>
                   
@@ -82,7 +82,7 @@
                   </v-tab-item>
                   <v-tab-item :id="'documento'" :key="3">
                     <v-card flat>
-                      <InitiativeDocument :url="initiative.doc_url"/>
+                      <InitiativeDocument :url="initiative.document_url"/>
                     </v-card>
                   </v-tab-item>
                   <v-tab-item :id="'firma'" :key="4">

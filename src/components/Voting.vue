@@ -6,11 +6,11 @@
           v-for="(vote,i) in votes"
           :key="i">
           <v-card >
-            <v-card-title ><h4>{{ vote.position }}</h4></v-card-title>
+            <v-card-title ><h4>{{ vote.value }}</h4></v-card-title>
             <v-divider></v-divider>
             <v-list class="list" dense>
               <v-list-tile
-                v-for="(voter, i) in vote.votees"
+                v-for="(voter, i) in vote.congresspeople"
                 :key="i">
                 <v-list-tile-content>
                   {{ voter }}
@@ -24,13 +24,23 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'Timeline',
   props:{
-    votes:Array
+    id:0,
   },
   data: () => ({
+    votes:[]
+  }),
+  beforeMount(){
+    axios.get('https://conocetucongreso.me/api/initiatives/'+this.id+'/votes')
+    .then(response => {
+        this.votes=response.data;
     })
+    .catch()
+  }
 }
 </script>
 
