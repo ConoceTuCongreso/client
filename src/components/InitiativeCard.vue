@@ -4,7 +4,7 @@
 
       <v-card>
 
-        <v-card-title @click="show = !show" no-action>
+        <v-card-title @click="showInitiativeInfo = !showInitiativeInfo" no-action>
           <v-flex xs12 sm11>
             <div class="headline">{{initiative.description}}</div>
             <span class="grey--text">Ingresado Por: {{initiative.author}}</span>
@@ -12,7 +12,7 @@
           <v-flex xs12 sm1>
             <v-card-actions>
               <v-btn icon>
-                <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+                <v-icon>{{ showInitiativeInfo ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
               </v-btn>
             </v-card-actions>
           </v-flex>
@@ -43,54 +43,64 @@
         <br>
 
         <v-slide-y-transition>
-          <v-layout v-show="show">
-            <v-tabs class="tabmenu">
-              <v-flex xs12 class="tabcolor" row>
-                <v-tab class="white--text tab" :href="'#votantes'" :key="1">
-                  <v-icon dark>how_to_reg</v-icon>
-                  Votantes
-                </v-tab >
+          <v-layout fill-height v-show="showInitiativeInfo">
+            <v-tabs class="tabmenu tab">
 
-                <v-tab class="white--text tab" :href="'#lTiempo'" :key="2">
-                  <v-icon dark>query_builder</v-icon>
-                  Linea del tiempo
-                </v-tab>
+              <v-layout fill-height xs12 class="tabcolor tab" row>
+                <v-flex class="tab"> 
+                  <v-tab class="white--text tab" :href="'#votantes'" :key="1">
+                    <v-icon dark>how_to_reg</v-icon>
+                    Votantes
+                  </v-tab>
+                </v-flex>
 
-                <v-tab class="white--text tab"  :href="'#documento'" :key="3">
-                  <v-icon dark>book</v-icon>
-                  Documento
-                </v-tab>
+                <v-flex class="tab">
+                  <v-tab class="white--text tab" :href="'#lTiempo'" :key="2">
+                    <v-icon dark>query_builder</v-icon>
+                    Linea del tiempo
+                  </v-tab>
+                </v-flex>
 
-                <v-tab class="white--text tab" fill-height :href="'#firma'" :key="4">
-                  <v-icon dark>how_to_vote</v-icon>
-                  Firmar
-                </v-tab>
-              </v-flex>
-              
+                <v-flex class="tab">
+                  <v-tab class="white--text tab"  :href="'#documento'" :key="3">
+                    <v-icon dark>book</v-icon>
+                    Documento
+                  </v-tab>
+                </v-flex>
+
+                <v-flex class="tab">
+                  <v-tab class="white--text tab" fill-height :href="'#firma'" :key="4">
+                    <v-icon dark>how_to_vote</v-icon>
+                    Firmar
+                  </v-tab>
+                </v-flex>
+              </v-layout>
                 
-                <v-tabs-items>
-                  <v-tab-item :id="'votantes'" :key="1">
-                    <v-card flat class="tabmenu">
-                      <Voting :votes="initiative.votes"/>
-                    </v-card>
-                  </v-tab-item>
-                  
-                  <v-tab-item :id="'lTiempo'" :key="2">
-                    <v-card flat  class="tabmenu">
-                      <Timeline :timeline="initiative.dates"/>
-                    </v-card>
-                  </v-tab-item>
-                  <v-tab-item :id="'documento'" :key="3">
-                    <v-card flat>
-                      <InitiativeDocument :url="initiative.doc_url"/>
-                    </v-card>
-                  </v-tab-item>
-                  <v-tab-item :id="'firma'" :key="4">
-                    <v-card flat>
-                      <InitiativeSign :initiativename="initiative.description" />
-                    </v-card>
-                  </v-tab-item>
-                </v-tabs-items>
+              <v-tabs-items>
+                <v-tab-item :id="'votantes'" :key="1">
+                  <v-card flat class="tabmenu">
+                    <Voting :votes="initiative.votes"/>
+                  </v-card>
+                </v-tab-item>
+                
+                <v-tab-item :id="'lTiempo'" :key="2">
+                  <v-card flat  class="tabmenu">
+                    <Timeline :timeline="initiative.dates"/>
+                  </v-card>
+                </v-tab-item>
+
+                <v-tab-item :id="'documento'" :key="3">
+                  <v-card flat>
+                    <InitiativeDocument :url="initiative.doc_url"/>
+                  </v-card>
+                </v-tab-item>
+                
+                <v-tab-item :id="'firma'" :key="4">
+                  <v-card flat>
+                    <InitiativeSign :initiativename="initiative.description" :initiativeID="initiative_id" />
+                  </v-card>
+                </v-tab-item>
+              </v-tabs-items>
                
             </v-tabs>
           </v-layout>
@@ -111,7 +121,7 @@ import InitiativeDocument from './InitiativeDocument.vue'
   export default {
     name: 'InitiativeCard',
     data: () => ({
-      show: false,
+      showInitiativeInfo: false,
       val:  0
     }),
     props: {
@@ -155,6 +165,8 @@ import InitiativeDocument from './InitiativeDocument.vue'
   background-color: #16a085;
 }
 .tab{
-  width: 24%
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
 }
 </style>
