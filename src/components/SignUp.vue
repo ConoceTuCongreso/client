@@ -1,24 +1,17 @@
 <template lang="html">
 
-  <v-layout>
+  <v-layout class="title">
     <v-flex xs12 sm10 offset-sm1>
-      <v-card>
-
+      <v-card flat>
         <v-layout row wrap>
-
-
           <v-flex xs12>
             <v-flex xs12 sm10 offset-sm1>
-
-              <v-card-title>
-                <h3 class="headline">Regístrate</h3>
-              </v-card-title>
 
               <v-card-text class="px-0">
                 <v-form>
                   <v-container>
+                    <h1 class="header-text">Regístrate</h1>
                     <v-layout row wrap>
-
                       <v-flex xs12>
                         <v-text-field
                         dense
@@ -110,6 +103,7 @@
 
                       <v-flex xs12>
                         <v-checkbox
+                        center
                         dense
                         v-model="checkbox"
                         :error-messages="checkboxErrors"
@@ -122,14 +116,11 @@
                       </v-flex>
 
                     </v-layout>
-
+                    <br>
                     <v-layout>
-                    
                     <v-btn depressed @click="register()" color="accent">submit</v-btn>
                     <v-spacer></v-spacer>
-
                     <v-btn flat small to='./SignIn'>Ya tengo una cuenta</v-btn>
-
                     </v-layout>
 
                   </v-container>
@@ -153,23 +144,38 @@
 <script>
   import axios from 'axios';
   import { validationMixin } from 'vuelidate'
-  import { required, maxLength, email, minLength } from 'vuelidate/lib/validators'
+  import { required, maxLength, email, minLength, alphaNum, not, sameAs} from 'vuelidate/lib/validators'
 
+  const hasNum = (value) =>  {
+    if (typeof value === 'undefined' || value === null || value === '') {
+      return true
+    } return /[0-9]/g.test(value)
+  }
+  const hasLower = (value) =>  {
+    if (typeof value === 'undefined' || value === null || value === '') {
+      return true
+    } return /[a-z]/g.test(value)
+  }
+  const hasUpper = (value) =>  {
+    if (typeof value === 'undefined' || value === null || value === '') {
+      return true
+    } return /[A-Z]/g.test(value)
+  }
+  
   export default {
-    mixins: [validationMixin],
 
+    mixins: [validationMixin],
     validations: {
       user: { required, maxLength: maxLength(64), minLength: minLength(2) },
       name: { required, maxLength: maxLength(64), minLength: minLength(2) },
       lName1: { required, maxLength: maxLength(64), minLength: minLength(2) },
       lName2: { maxLength: maxLength(64), minLength: minLength(2) },
-      pass: { required, minLength: minLength(8) },
-      pass2: { required },
+      pass: { required, minLength: minLength(10), notAN: not(alphaNum), hasNum, hasUpper, hasLower},
+      pass2: { required, sameAs: sameAs('pass') },
       email: { required, email },
       checkbox: { checked (val) { return val } }
     },
     password: 'Password',
-
     data: () => ({
 
       user: '',
@@ -226,6 +232,10 @@
         const errors = []
         if (!this.$v.pass.$dirty) return errors
         !this.$v.pass.minLength && errors.push('La contraseña debe tener al menos 10 caracteres')
+        !this.$v.pass.hasNum && errors.push('La contraseña debe tener al menos un número')
+        !this.$v.pass.hasUpper && errors.push('La contraseña debe tener al menos una mayúscula')
+        !this.$v.pass.hasLower && errors.push('La contraseña debe tener al menos una minúscula')
+        !this.$v.pass.notAN && errors.push('La contraseña debe tener al menos un caracter especial')
         !this.$v.pass.required && errors.push('Este es un campo requerido')
         return errors
       },
@@ -233,7 +243,7 @@
         const errors = []
         if (!this.$v.pass2.$dirty) return errors
         !this.$v.pass2.required && errors.push('Este es un campo requerido')
-        !(this.$v.pass2.$model === this.$v.pass.$model) && errors.push('Las contraseñas no coinciden')
+        !this.$v.pass2.sameAs && errors.push('Las contraseñas no coinciden')
         return errors
       },
       emailErrors () {
@@ -246,21 +256,22 @@
     },
 
     methods: {
-      submit () {
-        this.$v.$touch()
-      },
       register (){
+        if(this.$v.$anyError || !this.$v.$anyDirty){
+          this.$v.$touch()
+        } else {
         axios.post(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/signup',
-        {
-        'username': this.user,
-        'first_name': this.name,
-        'middle_name': this.lName2,
-        'last_name' : this.lName1,
-        'email': this.email,
-        'password': this.pass
-        })
-        .then()
-        .catch()
+          {
+          'username': this.user,
+          'first_name': this.name,
+          'middle_name': this.lName2,
+          'last_name' : this.lName1,
+          'email': this.email,
+          'password': this.pass
+          })
+          .then()
+          .catch()
+        }
       }
     }
   }
