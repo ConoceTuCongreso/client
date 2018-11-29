@@ -22,16 +22,15 @@ export default {
     },
     methods:{
         loadInitiatives(id){
-            axios.get('https://conocetucongreso.me/api/initiatives?category_id='+id)
+            axios.get(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/initiatives?category_id='+id)
         .then(response => {
-            console.log(response.data)
             this.initiatives=response.data;
         })
         .catch()
         }
     },
     beforeMount(){
-        this.loadInitiatives(5)
+        this.loadInitiatives(1)
     },
     mounted(){
         this.$root.$on('event', data => {

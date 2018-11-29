@@ -1,7 +1,8 @@
 <template lang="html">
 <v-container fluid grid-list-md>
-    <v-layout row wrap>
+    <v-layout row wrap  v-if="status=='Concluido'">
         <v-flex
+         
           xs3
           v-for="(vote,i) in votes"
           :key="i">
@@ -20,6 +21,11 @@
           </v-card>
         </v-flex>
       </v-layout>
+      <v-layout justify-center  v-if="status!='Concluido'">
+        <br>
+        <h2>Esta iniciativa no esta en la etapa de votación.</h2>
+        <br>
+      </v-layout>
     </v-container>
 </template>
 
@@ -30,12 +36,13 @@ export default {
   name: 'Timeline',
   props:{
     id:0,
+    status:''
   },
   data: () => ({
     votes:[]
   }),
   beforeMount(){
-    axios.get('https://conocetucongreso.me/api/initiatives/'+this.id+'/votes')
+    axios.get(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/initiatives/'+this.id+'/votes')
     .then(response => {
         this.votes=response.data;
     })
