@@ -4,7 +4,7 @@
       <v-flex xs5 class=".colored" fill-height align-center>
         <v-card flat tile color="gray4" class=".colored" height="100%">
           <v-layout row fill-height align-center>
-            <v-img :src="require('../img/logo.png')"></v-img>
+            <v-img :src="require('../img/Logo.svg')"></v-img>
           </v-layout>
         </v-card>
       </v-flex>

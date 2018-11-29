@@ -30,7 +30,7 @@ export default {
         }
     },
     beforeMount(){
-        this.loadInitiatives(1)
+        this.loadInitiatives(5)
     },
     mounted(){
         this.$root.$on('event', data => {
