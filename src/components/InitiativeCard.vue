@@ -4,43 +4,54 @@
 
       <v-card>
 
-        <v-card-title @click="showInitiativeInfo = !showInitiativeInfo" no-action>
-          <v-flex xs12 sm11>
+        <v-card-title no-action>
+          <v-flex xs12>
             <div class="headline">{{initiative.description}}</div>
             <span class="grey--text">Ingresado Por: {{initiative.author}}</span>
           </v-flex>
-          <v-flex xs12 sm1>
-            <v-card-actions>
-              <v-btn icon>
-                <v-icon>{{ showInitiativeInfo ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
-              </v-btn>
-            </v-card-actions>
-          </v-flex>
+          
         </v-card-title>
 
         <v-divider></v-divider>
+        
+        <v-layout row>
+          <v-flex xs10>
+            <v-layout row>
+              <v-flex xs10 offset-xs1>
+                <v-stepper class="elevation-0" alt-labels>
+                  <v-stepper-header>
+                    <v-stepper-step complete v-if="step1=='complete'">Ingreso</v-stepper-step>
+                    <v-stepper-step v-if="step1=='pending'">Ingreso</v-stepper-step>
 
-        <v-flex xs10 offset-xs1>
-          <v-progress-linear
-            color="#1abc9c"
-            height="20"
-            :value=val
-          ></v-progress-linear>
-        </v-flex>
+                    <v-divider></v-divider>
 
-        <v-layout xs10 offset-xs1 row class="text-xs-center">
-          
-          <v-flex xs3 offset-xs2>
-            <h3 class="headline">Entrada</h3>
+                    <v-stepper-step complete v-if="step2=='complete'">Estudio</v-stepper-step>
+                    <v-stepper-step v-if="step2=='pending'">Estudio</v-stepper-step>
+
+                    <v-divider></v-divider>
+
+                    <v-stepper-step complete v-if="step3=='complete'">Conclusion</v-stepper-step>
+                    <v-stepper-step v-if="step3=='pending'">Conclusion</v-stepper-step>
+                  </v-stepper-header>
+                </v-stepper>
+              </v-flex>
+            </v-layout>
           </v-flex>
-          <v-flex xs3 offset-xs1>
-            <h3 class="headline">En estudio</h3>
+          <v-flex xs1>
+            <v-layout row align-center justify-end> 
+              <v-btn flat icon @click="addToFavorite()" color="yellow">
+                <v-icon>star</v-icon>
+              </v-btn>
+            </v-layout>
           </v-flex>
-          <v-flex xs2 offset-xs1>
-            <h3 class="headline">Conclusion</h3>
+          <v-flex xs1>
+            <v-layout row align-center justify-start>
+              <v-btn icon @click="showInitiativeInfo = !showInitiativeInfo">
+                <v-icon>{{ showInitiativeInfo ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+              </v-btn>
+            </v-layout>
           </v-flex>
         </v-layout>
-        <br>
 
         <v-slide-y-transition>
           <v-layout fill-height v-show="showInitiativeInfo">
@@ -76,31 +87,29 @@
                 </v-flex>
               </v-layout>
                 
-              <v-tabs-items>
-                <v-tab-item :id="'votantes'" :key="1">
-                  <v-card flat class="tabmenu">
-                    <Voting :votes="initiative.votes"/>
-                  </v-card>
-                </v-tab-item>
-                
-                <v-tab-item :id="'lTiempo'" :key="2">
-                  <v-card flat  class="tabmenu">
-                    <Timeline :timeline="initiative.dates"/>
-                  </v-card>
-                </v-tab-item>
-
-                <v-tab-item :id="'documento'" :key="3">
-                  <v-card flat>
-                    <InitiativeDocument :url="initiative.doc_url"/>
-                  </v-card>
-                </v-tab-item>
-                
-                <v-tab-item :id="'firma'" :key="4">
-                  <v-card flat>
-                    <InitiativeSign :initiativename="initiative.description" :initiativeID="initiative_id" />
-                  </v-card>
-                </v-tab-item>
-              </v-tabs-items>
+                <v-tabs-items>
+                  <v-tab-item :id="'votantes'" :key="1">
+                    <v-card flat class="tabmenu">
+                      <Voting :id="initiative.id" :status="initiative.status"/>
+                    </v-card>
+                  </v-tab-item>
+                  
+                  <v-tab-item :id="'lTiempo'" :key="2">
+                    <v-card flat  class="tabmenu">
+                      <Timeline :timeline="initiative.dates"/>
+                    </v-card>
+                  </v-tab-item>
+                  <v-tab-item :id="'documento'" :key="3">
+                    <v-card flat>
+                      <InitiativeDocument :url="initiative.document_url"/>
+                    </v-card>
+                  </v-tab-item>
+                  <v-tab-item :id="'firma'" :key="4">
+                    <v-card flat>
+                      <InitiativeSign :initiativename="initiative.description" :initiativeID="initiative.id" />
+                    </v-card>
+                  </v-tab-item>
+                </v-tabs-items>
                
             </v-tabs>
           </v-layout>
@@ -122,7 +131,9 @@ import InitiativeDocument from './InitiativeDocument.vue'
     name: 'InitiativeCard',
     data: () => ({
       showInitiativeInfo: false,
-      val:  0
+      step1: '',
+      step2: '',
+      step3: ''
     }),
     props: {
       initiative: Object,
@@ -136,19 +147,30 @@ import InitiativeDocument from './InitiativeDocument.vue'
     methods:{
       setProgressValue(status) {
         switch(status){
+          
           case "Ingreso Administrativo":
-            this.val=33;
+            this.step1= 'complete';
+            this.step2= 'pending';
+            this.step3= 'pending';
             break;
           case "Estudio":
-            this.val=66;
+            this.step1= 'complete';
+            this.step2= 'complete';
+            this.step3= 'pending';
             break;
           case "Concluido":
-            this.val=100;
+            this.step1= 'complete';
+            this.step2= 'complete';
+            this.step3= 'complete';
             break;
           default:
             this.val=0;
         }
-      }
+      },
+
+      addToFavorite(){
+        
+      }, 
     },
     beforeMount(){
       this.setProgressValue(this.initiative.status)
