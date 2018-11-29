@@ -93,7 +93,7 @@
           body = { 'username': this.user, 'password': this.pass };
         }
 
-          axios.post('https://conocetucongreso.me/api/login', body )
+          axios.post(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/login', body )
           .then( function (response) {
 
             if(response.status === 200){

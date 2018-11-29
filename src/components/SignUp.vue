@@ -260,7 +260,7 @@
         if(this.$v.$anyError || !this.$v.$anyDirty){
           this.$v.$touch()
         } else {
-          axios.post('https://conocetucongreso.me/api/signup',
+        axios.post(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/signup',
           {
           'username': this.user,
           'first_name': this.name,

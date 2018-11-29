@@ -51,6 +51,7 @@
               <v-list-tile
                 v-for="subItem in item.items"
                 :key="subItem.title"
+                @click="selectCategory(subItem.id)"
               >
                 <v-list-tile-content>
                   <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
@@ -83,36 +84,41 @@ export default {
           title: 'Cultura',
           active: true,
           items: [
-            { title: 'Cultura Civica' },
-            { title: 'Eventos Publicos' },
+            { title: 'Cultura Civica' , id:1},
+            { title: 'Eventos Publicos' , id:2},
           ]
         },
         {
           action: 'healing',
           title: 'Sector Salud',
           items: [
-            { title: 'Salud Publica' },
-            { title: 'Alimentacion' }
+            { title: 'Salud Publica', id:3 },
+            { title: 'Alimentacion' , id:4}
           ]
         },
         {
           action: 'domain',
           title: 'Gobierno de Jalisco',
           items: [
-            { title: 'Constitucion Politica' },
-            { title: 'Congreso Estatal' }
+            { title: 'Constitucion Politica' , id:4},
+            { title: 'Congreso Estatal' , id:5}
           ]
         },
         {
           action: 'train',
           title: 'Transporte',
           items: [
-            { title: 'Transporte Publico' },
-            { title: 'Transporte Privado' }
+            { title: 'Transporte Publico' , id:6},
+            { title: 'Transporte Privado' , id:7}
           ]
         }
       ]
     };
+  },
+  methods:{
+    selectCategory(id){
+      this.$root.$emit('event', id);
+    }
   }
 };
 </script>
