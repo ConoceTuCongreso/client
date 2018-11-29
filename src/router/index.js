@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import SignUp from '@/components/SignUp'
 import SignIn from '@/components/SignIn'
 import Home from '@/components/Home'
+import Welcome from '@/components/Welcome'
 import Landing from '@/components/Landing'
 import Main from '@/components/Main'
 
@@ -19,6 +20,10 @@ export default new Router({
       children: [
         {
           path: '/',
+          component: Welcome
+        },
+        {
+          path: '/signup',
           component: SignUp
         },
         {

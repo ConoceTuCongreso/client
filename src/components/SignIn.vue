@@ -1,17 +1,16 @@
 <template lang="html">
 
-  <v-layout  class="cosita">
+  <v-layout  class="title">
     <v-flex xs12 sm10 offset-sm1>
       <v-card flat>
         <v-layout row wrap>
           <v-flex xs12>
             <v-flex xs12 sm10 offset-sm1>
-              <v-card-title>
-                <h3 class="headline">Iniciar Sesión</h3>
-              </v-card-title>
+
               <v-card-text class="px-0">
                 <v-form>
                   <v-container>
+                    <h1 class="header-text">Inicia sesión</h1>
                     <v-layout row wrap>
                       <v-flex xs12>
                         <v-text-field
@@ -33,13 +32,14 @@
                       </v-flex>
 
                     </v-layout>
+                    <br>
                     <v-layout>
 
                     <v-btn depressed @click="check()" color="accent">submit</v-btn>
 
                         <v-spacer></v-spacer>
 
-                    <v-btn flat small to='./'>Crear una cuenta</v-btn>
+                    <v-btn flat small to='./signup'>Crear una cuenta</v-btn>
                     </v-layout>
 
                   </v-container>
