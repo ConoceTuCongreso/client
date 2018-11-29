@@ -1,5 +1,7 @@
 <template class="justify-center">
-  <embed :src=url width="800" height="800"/>
+  <v-layout justify-center>
+    <embed :src=url width="800" height="800"/>
+  </v-layout>
 </template>
 
 <script>

@@ -32,6 +32,7 @@ Vue.use(Vuetify, {
   blue2: "#1e90ff",
   violet1: "#5352ed",
   violet2: "#3742fa",
+  silver: "#BDC3C7"
 
 }})
 
