@@ -85,8 +85,8 @@
               single-line
               outline
               name="input-7-4"
-              label="Comentario"
-              value="La iniciativa puede ayudar a una gran parte de la población de mascotas para prevenir enfermedades más comunes."
+              label="Escriba su comentario"
+              value=""
             ></v-textarea>
           </v-flex>
         </div>
