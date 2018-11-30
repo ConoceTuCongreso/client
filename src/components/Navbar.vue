@@ -36,30 +36,26 @@
 
             <v-list-group
               v-for="item in items"
-              v-model="item.active"
-              :key="item.title"
-              :prepend-icon="item.action"
+              :key="item.group"
               no-action
             >
 
               <v-list-tile slot="activator">
                 <v-list-tile-content>
-                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                  <v-list-tile-title>{{ item.group }}</v-list-tile-title>
                 </v-list-tile-content>
               </v-list-tile>
   
               <v-list-tile
-                v-for="subItem in item.items"
+                v-for="subItem in item.categories"
                 :key="subItem.title"
                 @click="selectCategory(subItem.id)"
               >
                 <v-list-tile-content>
-                  <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
+                  <v-list-tile-title>{{ subItem.name }}</v-list-tile-title>
                 </v-list-tile-content>
   
-                <v-list-tile-action>
-                  <v-icon>{{ subItem.action }}</v-icon>
-                </v-list-tile-action>
+                
               </v-list-tile>
             </v-list-group>
           </v-list>
@@ -72,53 +68,28 @@
 
 <script>
 //<v-img :src="require('../img/logo.png')" height="20%"></v-img>
-
+import axios from 'axios'
 export default {
   name: "Navbar",
   data() {
     return {
       drawer: null,
-            items: [
-        {
-          action: 'color_lens',
-          title: 'Cultura',
-          active: true,
-          items: [
-            { title: 'Cultura Civica' , id:1},
-            { title: 'Eventos Publicos' , id:2},
-          ]
-        },
-        {
-          action: 'healing',
-          title: 'Sector Salud',
-          items: [
-            { title: 'Salud Publica', id:3 },
-            { title: 'Alimentacion' , id:4}
-          ]
-        },
-        {
-          action: 'domain',
-          title: 'Gobierno de Jalisco',
-          items: [
-            { title: 'Constitucion Politica' , id:4},
-            { title: 'Congreso Estatal' , id:5}
-          ]
-        },
-        {
-          action: 'train',
-          title: 'Transporte',
-          items: [
-            { title: 'Transporte Publico' , id:6},
-            { title: 'Transporte Privado' , id:7}
-          ]
-        }
-      ]
+            items: []
     };
   },
   methods:{
     selectCategory(id){
       this.$root.$emit('event', id);
+    },loadCategories(){
+      axios.get(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/categories')
+      .then(response => {
+          this.items=response.data;
+      })
+      .catch()
     }
+
+  },beforeMount(){
+    this.loadCategories()
   }
 };
 </script>
