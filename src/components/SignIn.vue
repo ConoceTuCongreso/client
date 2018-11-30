@@ -100,7 +100,8 @@
       dialog: false,
       user: '',
       show1: false,
-      pass: ''
+      pass: '',
+      error: ''
     }),
 
     computed: {
@@ -151,7 +152,8 @@
             x => {
               
               this.dialog = true;
-              this.user = x;
+              this.error = x;
+              this.user = "";
               this.pass = "";
           }
           );
