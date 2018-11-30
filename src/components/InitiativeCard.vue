@@ -180,6 +180,7 @@ import InitiativeDocument from './InitiativeDocument.vue'
     watch:{
       initiative: function(val){
         this.setProgressValue(val.status);
+        this.showInitiativeInfo=false;
       }
 
     }
