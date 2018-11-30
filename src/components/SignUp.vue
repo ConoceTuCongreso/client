@@ -148,7 +148,6 @@
 
 <script>
   import axios from 'axios';
-  import router from '../router';
   import { validationMixin } from 'vuelidate'
   import { required, maxLength, email, minLength, alphaNum, not, sameAs} from 'vuelidate/lib/validators'
 
@@ -275,11 +274,7 @@
           'email': this.email,
           'password': this.pass
           })
-          .then(response => {
-            if(response.status === 200){
-              router.push('signin')
-            } 
-            })
+          .then()
           .catch()
         }
       }
