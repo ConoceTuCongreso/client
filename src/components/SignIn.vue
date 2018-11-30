@@ -80,22 +80,17 @@
 
 
 <script>
-
   import axios from 'axios';
   import router from '../router';
     import { validationMixin } from 'vuelidate'
   import { required } from 'vuelidate/lib/validators'
-
   export default {
-
      mixins: [validationMixin],
       validations: {
       user: { required},
       pass: { required}
     },
-
     password: 'Password',
-
     data: () => ({
       dialog: false,
       user: '',
@@ -103,7 +98,6 @@
       pass: '',
       error: ''
     }),
-
     computed: {
       userErrors () {
         const errors = []
@@ -118,26 +112,19 @@
         return errors
       }
     },
-
     methods: {
       check2 () {
-
         if(this.$v.$anyError || !this.$v.$anyDirty){
           this.$v.$touch()
         } else {
-
         
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}))$/;
         let body;
-
         if( re.test(String(this.user).toLowerCase()) ){
-
           body = {'email': this.user, 'password': this.pass };
         } else {
-
           body = { 'username': this.user, 'password': this.pass, 'WithCredentials': true };
         }
-
           axios(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/login',
           {
             method: "post",
@@ -165,5 +152,4 @@
 
 
 <style lang="css">
-
 </style>
