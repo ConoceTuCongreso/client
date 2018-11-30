@@ -119,38 +119,6 @@
     },
 
     methods: {
-      check () {
-
-        if(this.$v.$anyError || !this.$v.$anyDirty){
-          this.$v.$touch()
-        } else {
-
-        
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}))$/;
-        let body;
-
-        if( re.test(String(this.user).toLowerCase()) ){
-
-          body = {'email': this.user, 'password': this.pass };
-        } else {
-
-          body = { 'username': this.user, 'password': this.pass };
-        }
-
-          axios.post(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/login', body )
-          .then(response => {
-            if(response.status === 200){
-              router.push('main')
-            }
-          }).catch(
-            response => {
-              this.dialog = true;
-              this.user = "";
-              this.pass = "";
-          }
-          );
-        }
-      },
       check2 () {
 
         if(this.$v.$anyError || !this.$v.$anyDirty){
@@ -176,14 +144,14 @@
             withCredentials: true
           })
           .then(response => {
-            console.log(response);
             if(response.status === 200){
               router.push('main')
             }
           }).catch(
-            response => {
+            x => {
+              
               this.dialog = true;
-              this.user = "";
+              this.user = x;
               this.pass = "";
           }
           );
