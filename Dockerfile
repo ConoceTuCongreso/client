@@ -12,5 +12,6 @@ RUN npm install -g http-server
 WORKDIR /app
 
 COPY dist   /app/dist
+COPY .env /app/dist/.env
 
 CMD [ "http-server", "-p", "3000", "dist" ]
