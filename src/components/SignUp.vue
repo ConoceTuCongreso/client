@@ -107,11 +107,16 @@
                         dense
                         v-model="checkbox"
                         :error-messages="checkboxErrors"
-                        label="He leído y acepto los términos y condiciones."
                         required
                         @change="$v.checkbox.$touch()"
                         @blur="$v.checkbox.$touch()"
-                        ></v-checkbox>
+                        >
+                        <div slot="label">
+        He leído y acepto los
+          <a slot="activator" target="_blank" href="http://localhost:8080/#/terms" @click.stop>términos y condiciones.</a>
+
+      </div>
+                        </v-checkbox>
 
                       </v-flex>
 
