@@ -6,6 +6,7 @@ import Home from '@/components/Home'
 import Welcome from '@/components/Welcome'
 import Landing from '@/components/Landing'
 import Main from '@/components/Main'
+import Terms from '@/components/Terms'
 
 Vue.use(Router)
 
@@ -27,12 +28,16 @@ export default new Router({
           component: SignUp
         },
         {
-          path: 'signin',
+          path: '/signin',
           component: SignIn
         }
       ]
+    },    
+    {
+      path: '/terms',
+      name: 'Terms',
+      component: Terms
     },
-
     {
       path: '/main',
       name: 'Main',
