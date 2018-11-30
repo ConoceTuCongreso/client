@@ -104,7 +104,7 @@
                   </v-tab-item>
                   <v-tab-item :value="'firma'" :key="4">
                     <v-card flat color="silver" >
-                      <InitiativeSign :initiativename="initiative.description" :initiativeID="initiative.id" />
+                      <InitiativeSign :initiativename="initiative.description" :id="initiative.id" />
                     </v-card>
                   </v-tab-item>
                 </v-tabs-items>
