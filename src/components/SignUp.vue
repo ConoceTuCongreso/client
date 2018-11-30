@@ -113,7 +113,7 @@
                         >
                         <div slot="label">
         He leído y acepto los
-          <a slot="activator" target="_blank" to='https://conocetucongreso.me/#/terms' @click.stop>términos y condiciones.</a>
+          <a slot="activator" target="_blank" href="https://conocetucongreso.me/#/terms" @click.stop>términos y condiciones.</a>
 
       </div>
                         </v-checkbox>
