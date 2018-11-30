@@ -9,6 +9,7 @@
 </template>
 
 <script>
+
 import InitiativeCard from './InitiativeCard.vue'
 import axios from 'axios';
 
@@ -30,7 +31,7 @@ export default {
         }
     },
     beforeMount(){
-        this.loadInitiatives(1)
+        this.loadInitiatives(5)
     },
     mounted(){
         this.$root.$on('event', data => {

@@ -67,9 +67,9 @@ export default {
 }    
 
 .customTitle{
-font-family: 'Alfa Slab One', cursive;
+    font-family: 'Roboto Condensed', sans-serif;
     text-align: center;
-    font-weight:normal; 
+    font-weight: bold; 
     color: #2c3e50;
 }    
 </style>

@@ -20,42 +20,46 @@
           <v-flex xs10>
             <v-stepper class="elevation-0" alt-labels>
               <v-stepper-header>
-                <v-stepper-step complete color="gray4" step="" v-if="step1=='complete'" >Ingreso</v-stepper-step>
+                <v-stepper-step complete color="accent" step="" v-if="step1=='complete'" >Ingreso</v-stepper-step>
                 <v-stepper-step step="" v-if="step1=='pending'">Ingreso</v-stepper-step>
 
                 <v-divider></v-divider>
 
-                <v-stepper-step complete color="gray4" step="" v-if="step2=='complete'">Estudio</v-stepper-step>
+                <v-stepper-step complete color="accent" step="" v-if="step2=='complete'">Estudio</v-stepper-step>
                 <v-stepper-step step="" v-if="step2=='pending'">Estudio</v-stepper-step>
 
                 <v-divider></v-divider>
 
-                <v-stepper-step complete color="gray4" step="" v-if="step3=='complete'">Conclusion</v-stepper-step>
+                <v-stepper-step complete color="accent" step="" v-if="step3=='complete'">Conclusion</v-stepper-step>
                 <v-stepper-step step="" v-if="step3=='pending'">Conclusion</v-stepper-step>
               </v-stepper-header>
             </v-stepper>
           </v-flex>
-          <v-flex xs1>
+
+          
+          <v-layout col wrap xs2>
+
             <v-layout row align-center fill-height justify-end> 
               <v-btn flat icon @click="addToFavorite()" color="grey">
                 <v-icon>star</v-icon>
               </v-btn>
             </v-layout>
-          </v-flex>
-          <v-flex xs1>
+
             <v-layout row align-center fill-height>
               <v-btn icon @click="showInitiativeInfo = !showInitiativeInfo">
                 <v-icon>{{ showInitiativeInfo ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
               </v-btn>
             </v-layout>
-          </v-flex>
+            
+          </v-layout>
+       
         </v-layout>
 
         <v-slide-y-transition>
           <v-layout fill-height v-show="showInitiativeInfo">
             <v-tabs class="tabmenu tab">
 
-              <v-layout fill-height xs12  class="gray4 tab" row>
+              <v-layout fill-height xs12  class="gray3 tab" row>
                 <v-flex class="tab"> 
                   <v-tab class="white--text tab" :href="'#votantes'" :key="1">
                     <v-icon dark>how_to_reg</v-icon>
@@ -87,18 +91,18 @@
                 
                 <v-tabs-items>
                   <v-tab-item :value="'votantes'" :key="1">
-                    <v-card flat color="silver" >
+                    <v-card flat color="white" >
                       <Voting :id="initiative.id" :status="initiative.status"/>
                     </v-card>
                   </v-tab-item>
                   
                   <v-tab-item :value="'lTiempo'" :key="2">
-                    <v-card flat color="silver" >
+                    <v-card flat color="white" >
                       <Timeline :timeline="initiative.dates"/>
                     </v-card>
                   </v-tab-item>
                   <v-tab-item :value="'documento'" :key="3">
-                    <v-card flat color="silver" >
+                    <v-card flat color="white" >
                       <InitiativeDocument :url="initiative.document_url"/>
                     </v-card>
                   </v-tab-item>
@@ -176,6 +180,7 @@ import InitiativeDocument from './InitiativeDocument.vue'
     watch:{
       initiative: function(val){
         this.setProgressValue(val.status);
+        this.showInitiativeInfo=false;
       }
 
     }
