@@ -10,7 +10,7 @@
                     <v-container grid-list-xs>
                         <v-layout col justify-center>
                 
-                            <h1 class="customTitle"> Conoce Tu Congreso </h1>
+                            <h1 class="customTitle "> Conoce Tu Congreso </h1>
                         </v-layout>
                         <br>
                         <br>
