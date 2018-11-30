@@ -24,9 +24,12 @@ export default {
     methods:{
         loadInitiatives(id){
             if(id==0){
-                axios.get(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/initiatives/favorites')
-                .then(response => {
-                    this.initiatives=response.data;
+                axios(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/initiatives/favorites', 
+                {method:"get",withCredentials:true })
+                .then( response => {
+                    if(response.status === 200){
+                        this.initiatives=response.data;
+                    }
                 })
                 .catch()
             }else{
