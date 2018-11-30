@@ -4,10 +4,6 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"  dark  color="gray4" class="text--white"></v-toolbar-side-icon>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-
-        <v-btn flat to='./SignIn'>Iniciar Sesion</v-btn>
-        <v-btn flat to='./Home'>Home</v-btn>
-        <v-btn flat to='./SignUp'>Registrar</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 

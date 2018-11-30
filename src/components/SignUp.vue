@@ -89,7 +89,7 @@
 
                         <v-text-field
                         dense
-                        v-model="pass2"
+                        v-model="pass2"  
                         :error-messages="pass2Errors"
                         :type="show2 ? 'text' : 'password'"
                         :append-icon="show2 ? 'visibility_off' : 'visibility'"
