@@ -1,6 +1,19 @@
 <template lang="html">
 
   <v-layout  class="title">
+
+    <v-dialog
+      v-model="dialog"
+      max-width="290"
+    >
+      <v-card>
+        <v-card-title class="headline">Error</v-card-title>
+        <v-card-text>
+          Usuario o contraseña incorrectos.
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
     <v-flex xs12 sm10 offset-sm1>
       <v-card flat>
         <v-layout row wrap>
@@ -14,9 +27,12 @@
                     <v-layout row wrap>
                       <v-flex xs12>
                         <v-text-field
+                        :error-messages="userErrors"
                         dense
                         v-model="user"
                         label="Nombre de Usuario o Correo"
+                        @input="$v.user.$touch()"
+                        @blur="$v.user.$touch()"
                         ></v-text-field>
                       </v-flex>
 
@@ -24,10 +40,13 @@
                         <v-text-field
                         dense
                         v-model="pass"
+                        :error-messages="passErrors"
                         :type="show1 ? 'text' : 'password'"
                         :append-icon="show1 ? 'visibility_off' : 'visibility'"
                         label="Contraseña"
                         @click:append="show1 = !show1"
+                        @input="$v.pass.$touch()"
+                        @blur="$v.pass.$touch()"
                         ></v-text-field>
                       </v-flex>
 
@@ -35,7 +54,7 @@
                     <br>
                     <v-layout>
 
-                    <v-btn depressed @click="check()" color="accent">submit</v-btn>
+                    <v-btn depressed @click="check2()" color="accent">submit</v-btn>
 
                         <v-spacer></v-spacer>
 
@@ -64,23 +83,48 @@
 
   import axios from 'axios';
   import router from '../router';
+    import { validationMixin } from 'vuelidate'
+  import { required } from 'vuelidate/lib/validators'
 
   export default {
+
+     mixins: [validationMixin],
+      validations: {
+      user: { required},
+      pass: { required}
+    },
 
     password: 'Password',
 
     data: () => ({
-
+      dialog: false,
       user: '',
       show1: false,
       pass: ''
     }),
 
-    methods: {
-      submit () {
-        this.$v.$touch()
+    computed: {
+      userErrors () {
+        const errors = []
+        if (!this.$v.user.$dirty) return errors
+        !this.$v.user.required && errors.push('Este es un campo requerido')
+        return errors
       },
-      check () {
+      passErrors () {
+        const errors = []
+        if (!this.$v.pass.$dirty) return errors
+        !this.$v.pass.required && errors.push('Este es un campo requerido')
+        return errors
+      }
+    },
+
+    methods: {
+      check2 () {
+
+        if(this.$v.$anyError || !this.$v.$anyDirty){
+          this.$v.$touch()
+        } else {
+
         
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}))$/;
         let body;
@@ -90,16 +134,28 @@
           body = {'email': this.user, 'password': this.pass };
         } else {
 
-          body = { 'username': this.user, 'password': this.pass };
+          body = { 'username': this.user, 'password': this.pass, 'WithCredentials': true };
         }
 
-          axios.post(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/login', body )
-          .then( function (response) {
-
+          axios(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/login',
+          {
+            method: "post",
+            data: body,
+            withCredentials: true
+          })
+          .then(response => {
             if(response.status === 200){
               router.push('main')
             }
-          }).catch();
+          }).catch(
+            x => {
+              
+              this.dialog = true;
+              this.user = x;
+              this.pass = "";
+          }
+          );
+        }
       }
     }
   }
