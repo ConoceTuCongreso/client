@@ -1,7 +1,117 @@
 <template lang="html">
     <v-container grid-list-md text-xs-center >
+      <v-dialog
+              v-model="dialogUnauthorized"
+              width="500"
+          >
+              <v-card>
+              <v-card-title
+                  class="headline grey lighten-2"
+                  primary-title
+                  text-xs-center
+              >
+                  Error
+              </v-card-title>
+      
+              <v-card-text>
+                  Necesitas iniciar sesion para firmar la iniciativa
+              </v-card-text>
+      
+              <v-divider></v-divider>
+      
+              <v-card-actions >
+                  <v-spacer></v-spacer>
+                  
+                  <v-btn
+                  color="blue"
+                  class="white--text"
+                  @click="goToSignIn()"
+                  >
+                  Iniciar sesion
+                  </v-btn>
+              </v-card-actions>
+              </v-card>
+          </v-dialog>
 
 
+      <v-dialog
+              v-model="dialogConflict"
+              width="500"
+          >
+              <v-card>
+              <v-card-title
+                  class="headline grey lighten-2"
+                  primary-title
+                  text-xs-center
+              >
+                  Error
+              </v-card-title>
+      
+              <v-card-text>
+                  Esta iniciativa ya ha sido firmada con esta credencial
+              </v-card-text>
+      
+              <v-divider></v-divider>
+      
+              <v-card-actions >
+                  <v-spacer></v-spacer>
+                  
+                  <v-btn
+                  color="blue"
+                  class="white--text"
+                  @click="dialogError = false"
+                  >
+                  Entendido!
+                  </v-btn>
+              </v-card-actions>
+              </v-card>
+          </v-dialog>
+
+      <v-dialog v-model="dialogINE" width="500">
+        <v-card>
+          <v-card-title
+              class="headline grey lighten-2"
+              primary-title
+              text-xs-center
+          >
+              Solicitud de firma
+          </v-card-title>
+  
+          <v-card-text>
+              Llena los campos requeridos con la información de tu INE/IFE para poder firmar tu iniciativa
+              <v-text-field
+                v-model="CIC"
+                label="CIC"
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="OCR"
+                label="OCR"
+                required
+              ></v-text-field>
+          </v-card-text>
+  
+          <v-divider></v-divider>
+  
+          <v-card-actions >
+            <v-spacer></v-spacer>
+            <v-btn
+            color="blue"
+            class="white--text"
+            @click="dialogINE = false"
+            >
+            Cancelar
+            </v-btn>
+            <v-btn
+            color="blue"
+            class="white--text"
+            @click="sign()"
+            >
+            Firmar
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
 
           <v-dialog
               v-model="dialog"
@@ -84,9 +194,9 @@
               <v-textarea
               single-line
               outline
-              name="input-7-4"
+              v-model= "message"
+ 
               label="Escriba su comentario"
-              value=""
             ></v-textarea>
           </v-flex>
         </div>
@@ -95,6 +205,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+import router from '../router'
 export default {
   name: 'InitiativeSign',
   data: () => {
@@ -105,11 +217,18 @@ export default {
       clicked: false,
       dialog: false,
       tweetlink: "",
-      voted: false
+      voted: false,
+      dialogINE: false,
+      dialogConflict: false,
+      dialogUnauthorized: false,
+      CIC:'',
+      OCR: '',
+      message: ''
     }
   },
   props:{
-      initiativename:String
+      initiativename:String,
+      id:0
     },
   watch: {
     loader () {
@@ -120,20 +239,43 @@ export default {
 
       this.loader = null
 
-      this.dialog = true
+      this.dialogINE = true
 
       this.clicked = true
     }
   }, methods:{
-      voteagainst() {
-        this.tweetlink="https://twitter.com/intent/tweet?text=yo vote en contra de"+this.initiativename+" a travez de @ConoceTuCongreso";
-        this.voted=true;
-      },
-      voteinfavor() {
-        this.tweetlink="https://twitter.com/intent/tweet?text=yo vote a favor de "+this.initiativename+" a travez de @ConoceTuCongreso";
-        this.voted=true;
-      }
+    voteagainst() {
+      this.tweetlink="https://twitter.com/intent/tweet?text=yo vote en contra de"+this.initiativename+" a travez de @ConoceTuCongreso";
+    },
+    voteinfavor() {
+      this.tweetlink="https://twitter.com/intent/tweet?text=yo vote a favor de "+this.initiativename+" a travez de @ConoceTuCongreso";
+    },
+    goToSignIn(){
+      router.push("signin")
+    },
+    sign() {
+      
+      let body = {"CIC": this.CIC,"OCR": this.OCR,"message": this.message };
+      axios(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/initiatives/'+this.id+'/sign', 
+      {method:"post",data:body,withCredentials:true })
+      .then( response => {
+        if(response.status === 200){
+          this.dialogINE = false;
+          this.dialog = true;
+          this.voted=true;
+        }
+      })
+      .catch( err => {
+          if(err.response.status=== 409){
+            this.dialogConflict = true;
+          }else if(err.response.status=== 401){
+            this.dialogUnauthorized = true;
+          }
+          
+      })
+      
     }
+  }
 }
 </script>
 

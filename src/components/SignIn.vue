@@ -134,6 +134,7 @@
           .then(response => {
             if(response.status === 200){
               router.push('main')
+              
             }
           }).catch(
             x => {

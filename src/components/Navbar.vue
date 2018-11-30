@@ -28,33 +28,37 @@
 
 
     <v-list color="primary" class="white1">
-                          <v-divider></v-divider>
+      <v-divider></v-divider>
+      <v-list-tile @click="selectCategory(0)">
+        <v-list-tile-content>
+          <v-list-tile-title>Favoritos</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
 
-            <v-list-group
-              v-for="item in items"
-              :key="item.group"
-              no-action
-            >
+      <v-list-group
+        v-for="item in items"
+        :key="item.group"
+        no-action
+      >
 
-              <v-list-tile slot="activator">
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ item.group }}</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
-  
-              <v-list-tile
-                v-for="subItem in item.categories"
-                :key="subItem.title"
-                @click="selectCategory(subItem.id)"
-              >
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ subItem.name }}</v-list-tile-title>
-                </v-list-tile-content>
-  
-                
-              </v-list-tile>
-            </v-list-group>
-          </v-list>
+        <v-list-tile slot="activator">
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.group }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile 
+          v-for="subItem in item.categories"
+          :key="subItem.name"
+          @click="selectCategory(subItem.id)"
+        >
+          
+          <v-list-tile-content>
+            <v-list-tile-title @click.stop>{{ subItem.name }} </v-list-tile-title>
+          </v-list-tile-content>
+          </v-list-tile>
+        </v-list-group>
+      </v-list>
 
 
     </v-navigation-drawer>
@@ -70,7 +74,9 @@ export default {
   data() {
     return {
       drawer: null,
-            items: []
+      items: [],
+      showFavorites: false,
+      favs: []
     };
   },
   methods:{
