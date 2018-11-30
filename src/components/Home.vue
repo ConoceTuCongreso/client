@@ -23,12 +23,21 @@ export default {
     },
     methods:{
         loadInitiatives(id){
-            axios.get(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/initiatives?category_id='+id)
-        .then(response => {
-            this.initiatives=response.data;
-        })
-        .catch()
-        }
+            if(id==0){
+                axios.get(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/initiatives/favorites')
+                .then(response => {
+                    this.initiatives=response.data;
+                })
+                .catch()
+            }else{
+                axios.get(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/initiatives?category_id='+id)
+                .then(response => {
+                    this.initiatives=response.data;
+                })
+                .catch()
+                }
+            }
+            
     },
     beforeMount(){
         this.loadInitiatives(5)

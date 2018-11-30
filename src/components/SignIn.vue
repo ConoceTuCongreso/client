@@ -133,7 +133,7 @@
           .then(response => {
             if(response.status === 200){
               router.push('main')
-              console.log(response.headers)
+              
             }
           }).catch(
             x => {

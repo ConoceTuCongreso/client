@@ -40,7 +40,7 @@
           <v-layout col wrap xs2>
 
             <v-layout row align-center fill-height justify-end> 
-              <v-btn flat icon @click="addToFavorite()" color="grey">
+              <v-btn flat icon @click="addToFavorite(initiative.id)" :color="starColor">
                 <v-icon>star</v-icon>
               </v-btn>
             </v-layout>
@@ -107,7 +107,7 @@
                     </v-card>
                   </v-tab-item>
                   <v-tab-item :value="'firma'" :key="4">
-                    <v-card flat color="silver" >
+                    <v-card flat color="white" >
                       <InitiativeSign :initiativename="initiative.description" :id="initiative.id" />
                     </v-card>
                   </v-tab-item>
@@ -128,6 +128,7 @@ import Timeline from './Timeline'
 import InitiativeSign from './InitiativeSign'
 import Voting from './Voting'
 import InitiativeDocument from './InitiativeDocument.vue'
+import axios from 'axios'
 
   export default {
     name: 'InitiativeCard',
@@ -135,7 +136,8 @@ import InitiativeDocument from './InitiativeDocument.vue'
       showInitiativeInfo: false,
       step1: 'pending',
       step2: 'pending',
-      step3: 'pending'
+      step3: 'pending',
+      starColor: 'grey'
     }),
     props: {
       initiative: Object,
@@ -170,8 +172,15 @@ import InitiativeDocument from './InitiativeDocument.vue'
         }
       },
 
-      addToFavorite(){
-        
+      addToFavorite(id){
+        axios(process.env.VUE_APP_SCHEME+'://'+process.env.VUE_APP_HOST+process.env.VUE_APP_PORT+process.env.VUE_APP_PREFIX+'/initiatives/'+id+'/addToFavorites', 
+        {method:"post",withCredentials:true })
+        .then( response => {
+          if(response.status === 200){
+            this.starColor="yellow"
+          }
+        })
+        .catch();
       }, 
     },
     mounted(){
