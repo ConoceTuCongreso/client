@@ -10,7 +10,7 @@
       </v-flex>
       <v-flex xs7 align-center justify-center>
       <v-layout align-center justify-center>
-                        <router-view></router-view>
+      <router-view></router-view>
       </v-layout>          
       </v-flex>
     </v-layout>

@@ -9,6 +9,7 @@
 </template>
 
 <script>
+
 import InitiativeCard from './InitiativeCard.vue'
 import axios from 'axios';
 
